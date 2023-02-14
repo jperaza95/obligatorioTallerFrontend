@@ -13,7 +13,7 @@ const Ciudades = (idDepartamento) => {
 
   const cargarCiudades = e => {
 
-    fetch(`https://dwallet.develotion.com/ciudades.php?idDepartamento=${idDepartamento}`)
+    fetch(`https://dwallet.develotion.com/ciudades.php?idDepartamento=${ciudad.current.value}`)
       .then(response => response.json())
       .then(result => {
 
