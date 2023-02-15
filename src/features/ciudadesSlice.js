@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    dpto: null
+    dpto: null,
+    ciudadSeleccionada:null
 }
 
 export const ciudadesSlice = createSlice({
@@ -10,9 +11,13 @@ export const ciudadesSlice = createSlice({
     reducers: {
         seleccionarDpto: (state, action) => {
             state.dpto = action.payload;
+        },
+
+        seleccionarCiudad: (state, action) => {
+            state.ciudadSeleccionada = action.payload;
         }
     }
 });
 
-export const { seleccionarDpto } = ciudadesSlice.actions;
+export const { seleccionarDpto, seleccionarCiudad } = ciudadesSlice.actions;
 export default ciudadesSlice.reducer;

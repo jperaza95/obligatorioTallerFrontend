@@ -47,6 +47,8 @@ const Login = () => {
     return (
         <div className="container mt-5">
 
+            <h1>Login</h1>    
+
             <div className="form-row">
                 <div className="form-group col-md-8 " >
                     <label htmlFor="inputEmail4">Usuario</label>
@@ -65,7 +67,7 @@ const Login = () => {
             <div>
                 <button type="button" className="btn btn-primary" onClick={realizarLogin}>Login</button>
 
-                {error && <div className="alert alert-danger col-md-8" role="alert" data-aria-autofocus="true">
+                {error && <div className="alert alert-danger col-md-8 mt-3" role="alert" data-aria-autofocus="true">
                     Error en usuario y/o contraseña
                 </div>}
                 <br />

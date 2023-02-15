@@ -7,7 +7,7 @@ const AgregarGasto = () => {
   return (
     <div className="container mt-5">
 
-      <div className="form-row">
+      <div className="form-row justify-content-center">
         <div className="form-group col-md-8 " >
           <label htmlFor="inputConcepto">Concepto</label>
           <input type="text" className="form-control" id="inputConcepto" placeholder="Concepto" />
@@ -15,9 +15,9 @@ const AgregarGasto = () => {
       </div>
 
 
-      <div className="form-row">
+      <div className="form-row justify-content-center">
 
-        <div className="form-group col-md-4">
+        <div className="form-group col-md-4 ">
           <label htmlFor="inputRubro">Rubro</label>
           <select id="inputRubro" className="form-control">
             <option key={-1} value={-1}>Seleccione un rubro...</option>
@@ -39,23 +39,25 @@ const AgregarGasto = () => {
 
       </div>
 
-      <div className="form-row">
+      <div className="form-row justify-content-center">
         <div className="form-group col-md-8 " >
           <label htmlFor="inputTotal">Total</label>
           <input type="text" className="form-control" id="inputTotal" placeholder="Total" />
         </div>
+
+
+        <input className="col-md-5 " type="date" id="birthday" name="birthday"></input>
+
       </div>
 
-      <div className="form-row">
-          <input type="date" id="birthday" name="birthday"></input>
+      <div className="form-row justify-content-center">
+
+      <input type="button" className="btn btn-primary" value="Agregar" /><br />
+
       </div>
 
 
 
-
-      <div>
-        <input type="button" className="btn btn-primary" value="Agregar" /><br />
-      </div>
 
 
 
@@ -63,9 +65,11 @@ const AgregarGasto = () => {
         Error al agregar los datos. Verifique
       </div>}
 
-
-
     </div>
+
+
+
+
 
   )
 }

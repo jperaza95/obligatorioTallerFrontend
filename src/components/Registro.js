@@ -1,18 +1,16 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { guardarDepartamentos } from '../features/departamentosSlice';
-import { seleccionarDpto } from '../features/ciudadesSlice';
+import { useSelector } from 'react-redux'
 import Ciudades from './Ciudades';
-
-import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import Departamentos from './Departamentos';
+import Usuario from './Usuario';
 
 const Registro = () => {
 
-  const dpto = useRef(null);
-  const city = useRef(null);
+  const dpto = useSelector(state=> state.ciudades.dpto);
+  const city = useSelector(state => state.ciudades.ciudadSeleccionada);
   const usuario = useRef(null);
   const pass = useRef(null);
 
@@ -20,51 +18,14 @@ const Registro = () => {
 
   let navigate = useNavigate();
 
-
-  //Busca los departamentos en el store.
-  const dispatch = useDispatch();
-  const departamentos = useSelector(state => state.departamentos.departamentos);
-
-  //Se usa un state para mostrar las ciudades correspondientes al departamento seleccionado
-  const [ciudades, setCiudades] = useState([]);
-
-
-  //Guarda los departamentos en el store
-  useEffect(() => {
-    fetch("https://dwallet.develotion.com/departamentos.php")
-      .then(response => response.json())
-      .then(result => {
-
-        dispatch(guardarDepartamentos(result.departamentos));
-
-      })
-      .catch(error => console.log('error', error));
-
-  }, [])
-
-
-  //Obtiene las ciudades del departamento seleccionado
-  const obtenerCiudades = () => {
-    dispatch(seleccionarDpto(dpto.current.value));
-    // fetch(`https://dwallet.develotion.com/ciudades.php?idDepartamento=${dpto.current.value}`)
-    //   .then(response => response.json())
-    //   .then(result => {
-    //     console.log(result.ciudades);
-    //     setCiudades(result.ciudades);
-
-    //   })
-    //   .catch(error => console.log('error', error));
-  }
-
-
   // Realiza el registro
   const realizarRegistro = () => {
 
     let objUsuario = {
       "usuario": usuario.current.value,
       "password": pass.current.value,
-      "idDepartamento": dpto.current.value,
-      "idCiudad": city.current.value
+      "idDepartamento": dpto,
+      "idCiudad": city
     }
 
     let requestOptions = {
@@ -93,13 +54,15 @@ const Registro = () => {
 
   return (
     <div className="container mt-5">
+      <h1>Registro</h1>    
 
-      <div className="form-row">
+    <div className="form-row">
         <div className="form-group col-md-8 " >
           <label htmlFor="inputUsuarioRegistro">Usuario</label>
           <input type="text" ref={usuario} className="form-control" id="inputUsuarioRegistro" placeholder="Usuario" />
         </div>
-      </div>
+      </div> 
+
 
       <div className="form-row">
         <div className="form-group col-md-8">
@@ -113,26 +76,10 @@ const Registro = () => {
 
       <div className="form-row">
 
-
-        <div className="form-group col-md-4">
-          <label htmlFor="inputDepartamento">Departamento</label>
-          <select id="inputDepartamento" className="form-control" onChange={obtenerCiudades} ref={dpto}>
-            <option key={-1} value={-1}>Seleccione un departamento...</option>
-            {departamentos.map(dpto => <option key={dpto.id} value={dpto.id}>{dpto.nombre}</option>)}
-          </select>
-
-        </div>
+        <Departamentos/>
 
         <Ciudades/>
         
-        {/* <div className="form-group col-md-4">
-          <label htmlFor="inputCiudad">Ciudad</label>
-
-          <select id="inputCiudad" className="form-control" ref={city}>
-            {ciudades.map(ciudad => <option key={ciudad.id} value={ciudad.id}>{ciudad.nombre}</option>)}
-          </select>
-        </div> */}
-
         {error && <div className="alert alert-danger col-md-8" role="alert" data-aria-autofocus="true">
           Error al ingresar los datos. Verifique
         </div>}
