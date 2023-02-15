@@ -4,7 +4,7 @@ import { guardarDepartamentos } from '../features/departamentosSlice';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const Registro = () => {
 
@@ -12,6 +12,9 @@ const Registro = () => {
   const city = useRef(null);
   const usuario = useRef(null);
   const pass = useRef(null);
+
+  let navigate = useNavigate();
+
 
   //Busca los departamentos en el store.
   const dispatch = useDispatch();
@@ -67,7 +70,11 @@ const Registro = () => {
 
     fetch("https://dwallet.develotion.com/usuarios.php", requestOptions)
       .then(response => response.json())
-      .then(result => console.log(result))
+      .then(result => {
+        localStorage.setItem("apiKey", result.apiKey);
+        console.log(result);
+        navigate("/");
+      })
       .catch(error => console.log('error', error));
 
   }
@@ -120,7 +127,7 @@ const Registro = () => {
 
     <hr/>
 
-    <Link to="/">Ir a Login</Link>
+    <Link to="/login">Ir a Login</Link>
 
   </div>
 

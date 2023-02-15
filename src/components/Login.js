@@ -1,10 +1,10 @@
 import { useRef, useEffect, useState } from 'react';
-import { Link , useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
     let navigate = useNavigate();
-    
+
     const [error, setError] = useState(false);
 
     const usuario = useRef(null);
@@ -29,13 +29,14 @@ const Login = () => {
             .then(response => response.json())
             .then(result => {
                 console.log(result)
-                if(result.codigo === 200){
-                    navigate("/analisis");
-                }else{
+                if (result.codigo === 200) {
+                    localStorage.setItem("apiKey", result.apiKey);
+                    navigate("/");
+                } else {
                     setError(true);
                 }
             })
-            .catch(error =>{ 
+            .catch(error => {
                 setError(true);
                 console.log('error', error)
             });
@@ -62,10 +63,15 @@ const Login = () => {
 
             </div>
             <div>
-            <button type="button" className="btn btn-primary" onClick={realizarLogin}>Login</button>
-            {error && <p>Error en usuario y/o contraseña</p>}
+                <button type="button" className="btn btn-primary" onClick={realizarLogin}>Login</button>
+
+                {error && <div className="alert alert-danger col-md-8" role="alert" data-aria-autofocus="true">
+                    Error en usuario y/o contraseña
+                </div>}
                 <br />
             </div>
+
+
 
 
             <Link to="/registro">Ir a Registro</Link>

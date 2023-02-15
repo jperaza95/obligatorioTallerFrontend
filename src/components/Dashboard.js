@@ -1,10 +1,27 @@
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
+import { useEffect } from "react";
+
 
 const Dashboard = () => {
+  let navigate = useNavigate();
+  useEffect(() => {
+    console.log(localStorage.getItem("apiKey"));
+    if(localStorage.getItem("apiKey")===null){
+      navigate("/login");
+    }
+  
+
+  }, [])
+
+  const cerrarSesion = () =>{
+    localStorage.clear();
+  }
+  
+
   return (
     <div>
 
-<nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <a className="navbar-brand" href="#">Bienvenido</a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -30,7 +47,7 @@ const Dashboard = () => {
             </li>
           </ul>
           <span className="navbar-text">
-            Cerrar sesión
+          <Link to="/login" className="nav-link" onClick={cerrarSesion}>Cerrar Sesion</Link>
           </span>
         </div>
       </nav>
