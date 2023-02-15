@@ -1,9 +1,6 @@
-import React from 'react'
+/*import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { guardarDepartamentos } from '../features/departamentosSlice';
-import { seleccionarDpto } from '../features/ciudadesSlice';
-import Ciudades from './Ciudades';
-
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
@@ -45,15 +42,14 @@ const Registro = () => {
 
   //Obtiene las ciudades del departamento seleccionado
   const obtenerCiudades = () => {
-    dispatch(seleccionarDpto(dpto.current.value));
-    // fetch(`https://dwallet.develotion.com/ciudades.php?idDepartamento=${dpto.current.value}`)
-    //   .then(response => response.json())
-    //   .then(result => {
-    //     console.log(result.ciudades);
-    //     setCiudades(result.ciudades);
+    fetch(`https://dwallet.develotion.com/ciudades.php?idDepartamento=${dpto.current.value}`)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result.ciudades);
+        setCiudades(result.ciudades);
 
-    //   })
-    //   .catch(error => console.log('error', error));
+      })
+      .catch(error => console.log('error', error));
   }
 
 
@@ -122,16 +118,13 @@ const Registro = () => {
           </select>
 
         </div>
-
-        <Ciudades/>
-        
-        {/* <div className="form-group col-md-4">
+        <div className="form-group col-md-4">
           <label htmlFor="inputCiudad">Ciudad</label>
 
           <select id="inputCiudad" className="form-control" ref={city}>
             {ciudades.map(ciudad => <option key={ciudad.id} value={ciudad.id}>{ciudad.nombre}</option>)}
           </select>
-        </div> */}
+        </div>
 
         {error && <div className="alert alert-danger col-md-8" role="alert" data-aria-autofocus="true">
           Error al ingresar los datos. Verifique
@@ -157,3 +150,4 @@ export default Registro
 
 
 
+*/

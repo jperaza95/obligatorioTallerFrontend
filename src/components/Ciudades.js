@@ -1,19 +1,27 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRef } from "react";
+import { useSelector } from 'react-redux';
 
-const Ciudades = (idDepartamento) => {
+const Ciudades = () => {
+
+  const dpto = useSelector(state => state.ciudades.dpto);
+
+  
   useEffect(() => {
     cargarCiudades();
-  }, [])
+  }, [dpto])
+
 
   const ciudad = useRef(null);
 
   const [ciudades, setCiudades] = useState([]);
 
+
+
   const cargarCiudades = e => {
 
-    fetch(`https://dwallet.develotion.com/ciudades.php?idDepartamento=${ciudad.current.value}`)
+    fetch(`https://dwallet.develotion.com/ciudades.php?idDepartamento=${dpto}`)
       .then(response => response.json())
       .then(result => {
 
@@ -29,7 +37,7 @@ const Ciudades = (idDepartamento) => {
       <div className="form-group col-md-4">
         <label htmlFor="inputCiudad">Ciudad</label>
 
-        <select id="inputCiudad" ref={ciudad} className="form-control">
+        <select id="inputCiudad" ref={ciudad} className="form-control" onChange={cargarCiudades}>
           {ciudades.map(ciudad => <option key={ciudad.id} value={ciudad.id}>{ciudad.nombre}</option>)}
         </select>
 

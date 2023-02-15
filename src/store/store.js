@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import departamentosReducer from "../features/departamentosSlice"
-// import tareasReducer from "../features/tareasSlice"
+import ciudadesReducer from "../features/ciudadesSlice"
 
 export const store = configureStore({
     reducer:{
-        departamentos:departamentosReducer
+        departamentos:departamentosReducer,
+        ciudades:ciudadesReducer
     }
 });
