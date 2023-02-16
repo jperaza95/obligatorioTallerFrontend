@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-
+import Rubros from './Rubros';
 
 const AgregarGasto = () => {
   const [error, setError] = useState(false);
@@ -17,14 +17,8 @@ const AgregarGasto = () => {
 
       <div className="form-row justify-content-center">
 
-        <div className="form-group col-md-4 ">
-          <label htmlFor="inputRubro">Rubro</label>
-          <select id="inputRubro" className="form-control">
-            <option key={-1} value={-1}>Seleccione un rubro...</option>
-            {/* {rubros.map(rubro => <option key={rubro.id} value={rubro.id}>{rubro.nombre}</option>)} */}
-          </select>
+        <Rubros/>
 
-        </div>
         <div className="form-group col-md-4">
           <label htmlFor="inputMedio">Medio de pago</label>
 
