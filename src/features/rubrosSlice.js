@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    rubros: []
+    rubros: [],
+    rubro: null
 }
 
 export const rubrosSlice = createSlice({
@@ -10,9 +11,12 @@ export const rubrosSlice = createSlice({
     reducers: {
         guardarRubros: (state, action) => {
             state.rubros = action.payload;
+        },
+        seleccionarRubro: (state,action) =>{
+            state.rubro = action.payload;
         }
     }
 });
 
-export const { guardarRubros } = rubrosSlice.actions;
+export const { guardarRubros, seleccionarRubro } = rubrosSlice.actions;
 export default rubrosSlice.reducer;

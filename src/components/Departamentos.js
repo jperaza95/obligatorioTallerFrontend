@@ -34,7 +34,7 @@ const Departamentos = () => {
 
     }, [])
     return (
-        <div className="form-group col-md-4">
+        <div className="form-group col-md-6">
             <label htmlFor="inputDepartamento">Departamento</label>
             <select id="inputDepartamento" className="form-control" onChange={obtenerCiudades} ref={dpto}>
                 <option key={-1} value={-1}>Seleccione un departamento...</option>

@@ -47,36 +47,34 @@ const Login = () => {
     return (
         <div className="container mt-5">
 
-            <h1>Login</h1>    
+            <div className='form-row justify-content-center'>
 
-            <div className="form-row">
+                <h1 className="form-group col-md-8 ">Login</h1>
+
                 <div className="form-group col-md-8 " >
                     <label htmlFor="inputEmail4">Usuario</label>
                     <input type="text" className="form-control" id="inputUsuario" placeholder="Usuario" ref={usuario} />
                 </div>
-            </div>
 
-            <div className="form-row">
+
+
                 <div className="form-group col-md-8">
                     <label htmlFor="inputPassword4">Password</label>
                     <input type="password" className="form-control" id="inputPassword" placeholder="Password" ref={pass} />
+
+                    {error && <div className="alert alert-danger col-md mt-3" role="alert" data-aria-autofocus="true">
+                        Error en usuario y/o contraseña
+                    </div>}
+                    <button type="button" className="btn btn-primary mt-4" onClick={realizarLogin}>Login</button>
+
+
+                    <br />
+                    <hr></hr>
+                    <Link to="/registro">Ir a Registro</Link>
+
                 </div>
 
-
             </div>
-            <div>
-                <button type="button" className="btn btn-primary" onClick={realizarLogin}>Login</button>
-
-                {error && <div className="alert alert-danger col-md-8 mt-3" role="alert" data-aria-autofocus="true">
-                    Error en usuario y/o contraseña
-                </div>}
-                <br />
-            </div>
-
-
-
-
-            <Link to="/registro">Ir a Registro</Link>
 
         </div>
 

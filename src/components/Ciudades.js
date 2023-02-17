@@ -32,11 +32,11 @@ const Ciudades = () => {
 
   return (
 
-    <div className="form-group col-md-4">
+    <div className="form-group col-md-6">
       <label htmlFor="inputCiudad">Ciudad</label>
 
       <select id="inputCiudad" className="form-control" onChange={cargarCiudades}>
-        <option key={-1} value={-1}>Seleccione un departamento...</option>
+        <option key={-1} value={-1}>Seleccione una ciudad...</option>
         {ciudades.map(ciudad => <option key={ciudad.id} value={ciudad.id}>{ciudad.nombre}</option>)}
       </select>
 

@@ -9,7 +9,7 @@ import Usuario from './Usuario';
 
 const Registro = () => {
 
-  const dpto = useSelector(state=> state.ciudades.dpto);
+  const dpto = useSelector(state => state.ciudades.dpto);
   const city = useSelector(state => state.ciudades.ciudadSeleccionada);
   const usuario = useRef(null);
   const pass = useRef(null);
@@ -54,45 +54,54 @@ const Registro = () => {
 
   return (
     <div className="container mt-5">
-      <h1>Registro</h1>    
 
-    <div className="form-row">
+      <div className='form-row justify-content-center'>
+
+        <h1 className="form-group col-md-8 ">Registro</h1>
+
         <div className="form-group col-md-8 " >
           <label htmlFor="inputUsuarioRegistro">Usuario</label>
           <input type="text" ref={usuario} className="form-control" id="inputUsuarioRegistro" placeholder="Usuario" />
         </div>
-      </div> 
 
 
-      <div className="form-row">
+
+
         <div className="form-group col-md-8">
           <label htmlFor="inputPasswordRegistro">Password</label>
           <input type="password" ref={pass} className="form-control" id="inputPasswordRegistro" placeholder="Password" />
         </div>
+
+
+
+
+
+        <div className="form-group col-md-8">
+
+          <div className='form-row justify-content-start'>
+
+
+            <Departamentos />
+
+            <Ciudades />
+
+            {error && <div className="alert alert-danger col-md" role="alert" data-aria-autofocus="true">
+              Error al ingresar los datos. Verifique
+            </div>}
+
+
+          </div>
+          <div>
+            <input type="button" className="btn btn-primary" value="Registro" onClick={realizarRegistro} /><br />
+          </div>
+
+          <hr />
+
+          <Link to="/login">Ir a Login</Link>
+        </div>
+
+
       </div>
-
-
-
-
-      <div className="form-row">
-
-        <Departamentos/>
-
-        <Ciudades/>
-        
-        {error && <div className="alert alert-danger col-md-8" role="alert" data-aria-autofocus="true">
-          Error al ingresar los datos. Verifique
-        </div>}
-      </div>
-
-
-      <div>
-        <input type="button" className="btn btn-primary" value="Registro" onClick={realizarRegistro} /><br />
-      </div>
-
-      <hr />
-
-      <Link to="/login">Ir a Login</Link>
 
     </div>
 

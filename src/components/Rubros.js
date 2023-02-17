@@ -29,13 +29,15 @@ const Rubros = () => {
     }, [])
 
 
+
+
     return (
 
-        <div className="form-group col-md-4 ">
+        <div className="form-group col-md-8 ">
             <label htmlFor="inputRubro">Rubro</label>
             <select id="inputRubro" className="form-control">
                 <option key={-1} value={-1}>Seleccione un rubro...</option>
-                {rubros.map(rubro => <option key={rubro.id} value={rubro.id}>{rubro.nombre}</option>)}
+                {rubros.map(rubro => rubro.tipo==="gasto" && <option key={rubro.id} value={rubro.id}>{rubro.nombre}</option>)}
             </select>
 
         </div>

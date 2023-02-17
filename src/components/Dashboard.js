@@ -27,6 +27,7 @@ const Dashboard = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarText">
+          
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               {/* <a className="nav-link" href="/agregargasto">Agregar gasto <span className="sr-only">(current)</span></a> */}
