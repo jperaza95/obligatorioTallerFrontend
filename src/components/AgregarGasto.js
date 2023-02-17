@@ -16,30 +16,28 @@ const AgregarGasto = () => {
     let objGasto = {
       "idUsuario": 1,
       "concepto": concepto.current.value,
-      "categoria": 4,
-      "total": 10,
-      "medio": "Efectivo",
-      "fecha": "2022-09-29"
+      "categoria": rubro,
+      "total": total.current.value,
+      "medio": medio.current.value,
+      "fecha": fecha.current.value
     }
 
     let requestOptions = {
       method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(objUsuario),
+      headers: {
+        'Content-Type': 'application/json',
+        'apiKey': localStorage.getItem("apiKey"),
+
+      },
+      body: JSON.stringify(objGasto),
       redirect: 'follow'
     };
 
-    fetch("https://dwallet.develotion.com/usuarios.php", requestOptions)
+    fetch("https://dwallet.develotion.com/movimientos.php", requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log(result);
 
-        if (result.codigo === 200) {
-          localStorage.setItem("apiKey", result.apiKey);
-          navigate("/");
-        } else {
-          setError(true);
-        }
       })
       .catch(error => console.log('error', error));
 
