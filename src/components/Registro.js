@@ -1,11 +1,12 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Ciudades from './Ciudades';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Departamentos from './Departamentos';
-import Usuario from './Usuario';
+import { seleccionarUsuario } from '../features/usuarioSlice';
+
 
 const Registro = () => {
 
@@ -15,6 +16,8 @@ const Registro = () => {
   const pass = useRef(null);
 
   const [error, setError] = useState(false);
+
+  const dispatch = useDispatch();
 
   let navigate = useNavigate();
 
@@ -42,6 +45,7 @@ const Registro = () => {
 
         if (result.codigo === 200) {
           localStorage.setItem("apiKey", result.apiKey);
+          dispatch(seleccionarUsuario(result.id));
           navigate("/");
         } else {
           setError(true);

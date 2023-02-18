@@ -1,9 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { seleccionarUsuario } from '../features/usuarioSlice';
 
 const Login = () => {
 
     let navigate = useNavigate();
+
+    let dispatch = useDispatch();
 
     const [error, setError] = useState(false);
 
@@ -31,6 +35,10 @@ const Login = () => {
                 console.log(result)
                 if (result.codigo === 200) {
                     localStorage.setItem("apiKey", result.apiKey);
+                    localStorage.setItem("idUsuario", result.id);
+
+                    // dispatch(seleccionarUsuario(result.id));
+
                     navigate("/");
                 } else {
                     setError(true);

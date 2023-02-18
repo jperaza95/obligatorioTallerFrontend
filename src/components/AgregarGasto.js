@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Rubros from './Rubros';
+import { agregarMovimiento } from '../features/movimientosSlice';
 
 const AgregarGasto = () => {
   const [error, setError] = useState(false);
@@ -9,12 +10,18 @@ const AgregarGasto = () => {
   const medio = useRef(null);
   const total = useRef(null);
   const fecha = useRef(null);
+
+  const dispatch = useDispatch();
+
+
+  // const idUsuario = useSelector(state => state.usuario.usuario);
+  const idUsuario = localStorage.getItem("idUsuario");
   
   const nuevoGasto = () =>{
 
     
     let objGasto = {
-      "idUsuario": 1,
+      "idUsuario": idUsuario,
       "concepto": concepto.current.value,
       "categoria": rubro,
       "total": total.current.value,
@@ -36,7 +43,9 @@ const AgregarGasto = () => {
     fetch("https://dwallet.develotion.com/movimientos.php", requestOptions)
       .then(response => response.json())
       .then(result => {
+        console.log(objGasto);
         console.log(result);
+        dispatch(agregarMovimiento(result));
 
       })
       .catch(error => console.log('error', error));
@@ -49,6 +58,9 @@ const AgregarGasto = () => {
       <div className='form-row justify-content-center'>
         <div className='form-group col-md-8'>
           <div className='form-row'>
+
+          <h1 className="form-group col-md-8 ">Agregar gasto</h1>
+          
 
             <div className="form-group col-md-8 " >
               <label htmlFor="inputConcepto">Concepto</label>
