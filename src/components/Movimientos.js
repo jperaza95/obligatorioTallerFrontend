@@ -1,12 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { guardarMovimientos } from "../features/movimientosSlice";
 import { useEffect } from "react";
+import Movimiento from "./Movimiento";
+import { useNavigate } from "react-router-dom";
 
 const Movimientos = () => {
 
   const idUsuario = localStorage.getItem("idUsuario");
   const dispatch = useDispatch();
   const movimientos = useSelector(store => store.movimientos.movimientos);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     fetch(`https://dwallet.develotion.com/movimientos.php?idUsuario=${idUsuario}`, {
@@ -20,7 +23,14 @@ const Movimientos = () => {
       .then(response => response.json())
       .then(result => {
         console.log(result);
-        dispatch(guardarMovimientos(result.movimientos));
+        if(result.codigo === 401){
+          alert("Sesion caduco");
+          localStorage.clear();
+          navigate("/login");
+
+        }else{
+          dispatch(guardarMovimientos(result.movimientos));
+        }
 
 
       })
@@ -55,16 +65,7 @@ const Movimientos = () => {
               <tbody>
 
                 {movimientos.map(mov =>
-                  <tr>
-                    <th scope="row">{mov.id}</th>
-                    <td>{mov.concepto}</td>
-                    <td>{mov.categoria}</td>
-                    <td>{mov.medio}</td>
-                    <td>{mov.total}</td>
-                    <td>{mov.fecha}</td>
-                    <td><a href="#">Eliminar</a></td>
-
-                  </tr>)}
+                  <Movimiento movim = {mov} key={mov.id}/>)}
 
               </tbody>
             </table>
