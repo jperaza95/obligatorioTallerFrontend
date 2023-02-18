@@ -2,8 +2,9 @@ import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Rubros from './Rubros';
 import { agregarMovimiento } from '../features/movimientosSlice';
+import { useNavigate } from 'react-router-dom';
 
-const AgregarGasto = () => {
+const AgregarMovimiento = ({tipo}) => {
   const [error, setError] = useState(false);
   const concepto = useRef(null);
   const rubro = useSelector(state=> state.rubros.rubro);
@@ -12,6 +13,8 @@ const AgregarGasto = () => {
   const fecha = useRef(null);
 
   const dispatch = useDispatch();
+  let navigate = useNavigate();
+
 
 
   // const idUsuario = useSelector(state => state.usuario.usuario);
@@ -20,7 +23,7 @@ const AgregarGasto = () => {
   const nuevoGasto = () =>{
 
     
-    let objGasto = {
+    let objMovimiento = {
       "idUsuario": idUsuario,
       "concepto": concepto.current.value,
       "categoria": rubro,
@@ -36,16 +39,17 @@ const AgregarGasto = () => {
         'apiKey': localStorage.getItem("apiKey"),
 
       },
-      body: JSON.stringify(objGasto),
+      body: JSON.stringify(objMovimiento),
       redirect: 'follow'
     };
 
     fetch("https://dwallet.develotion.com/movimientos.php", requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(objGasto);
+        console.log(objMovimiento);
         console.log(result);
         dispatch(agregarMovimiento(result));
+
 
       })
       .catch(error => console.log('error', error));
@@ -59,7 +63,9 @@ const AgregarGasto = () => {
         <div className='form-group col-md-8'>
           <div className='form-row'>
 
-          <h1 className="form-group col-md-8 ">Agregar gasto</h1>
+          {tipo==="gasto"?<h1 className="form-group col-md-8 ">Agregar gasto</h1>:
+
+          <h1 className="form-group col-md-8 ">Agregar ingreso</h1>}
           
 
             <div className="form-group col-md-8 " >
@@ -68,7 +74,7 @@ const AgregarGasto = () => {
             </div>
 
 
-            <Rubros />
+            <Rubros tipoRubro={tipo}/>
 
             <div className="form-group col-md-8">
               <label htmlFor="inputMedio">Medio de pago</label>
@@ -123,4 +129,4 @@ const AgregarGasto = () => {
   )
 }
 
-export default AgregarGasto
+export default AgregarMovimiento
