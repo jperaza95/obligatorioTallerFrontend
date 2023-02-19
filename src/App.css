@@ -38,10 +38,10 @@
   }
 }
 
-.active {
+/* .active {
   background-color: #333;
   color: #F0F0F0;
-}
+} */
 
 #fecha {
   border-color: silver;
@@ -82,4 +82,5 @@
   form input {
     margin-bottom: 0.7em;
   }
+
 }

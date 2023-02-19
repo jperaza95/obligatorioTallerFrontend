@@ -9,9 +9,13 @@ const Movimientos = () => {
   const idUsuario = localStorage.getItem("idUsuario");
   const dispatch = useDispatch();
   const movimientos = useSelector(store => store.movimientos.movimientos);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
+    cargarMovimientos();
+  }, [])
+
+  const cargarMovimientos = () => {
     fetch(`https://dwallet.develotion.com/movimientos.php?idUsuario=${idUsuario}`, {
       method: 'GET',
       headers: {
@@ -23,12 +27,12 @@ const Movimientos = () => {
       .then(response => response.json())
       .then(result => {
         console.log(result);
-        if(result.codigo === 401){
+        if (result.codigo === 401) {
           alert("Sesion caduco");
           localStorage.clear();
           navigate("/login");
 
-        }else{
+        } else {
           dispatch(guardarMovimientos(result.movimientos));
         }
 
@@ -36,7 +40,9 @@ const Movimientos = () => {
       })
       .catch(error => console.log('error', error));
 
-  }, [])
+  }
+
+
 
 
 
@@ -65,7 +71,7 @@ const Movimientos = () => {
               <tbody>
 
                 {movimientos.map(mov =>
-                  <Movimiento movim = {mov} key={mov.id}/>)}
+                  <Movimiento movim={mov} key={mov.id} cargarMovimientos = {cargarMovimientos}/>)}
 
               </tbody>
             </table>

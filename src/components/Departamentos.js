@@ -1,17 +1,16 @@
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { seleccionarDpto } from '../features/ciudadesSlice';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { guardarDepartamentos } from '../features/departamentosSlice';
-
+import { useNavigate } from 'react-router-dom';
 
 const Departamentos = () => {
 
     //Busca los departamentos en el store.
     const departamentos = useSelector(state => state.departamentos.departamentos);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
 
     const dpto = useRef(null);
 
@@ -27,7 +26,14 @@ const Departamentos = () => {
             .then(response => response.json())
             .then(result => {
 
-                dispatch(guardarDepartamentos(result.departamentos));
+                if(result.codigo === 401){
+                    alert("Sesion caduco");
+                    localStorage.clear();
+                    navigate("/login");          
+                  }else{
+                      dispatch(guardarDepartamentos(result.departamentos));             
+                  }
+
 
             })
             .catch(error => console.log('error', error));

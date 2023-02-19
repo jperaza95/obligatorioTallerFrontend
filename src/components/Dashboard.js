@@ -22,7 +22,7 @@ const Dashboard = () => {
     <div className="container-fluid">
       <div className="row">
 
-        <div className="col-md-2">
+        <div className="col-md-2" >
 
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a className="navbar-brand" href="#">Bienvenido</a>
