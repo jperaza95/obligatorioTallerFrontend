@@ -42,9 +42,9 @@ const Departamentos = () => {
     return (
         <div className="form-group col-md-6">
             <label htmlFor="inputDepartamento">Departamento</label>
-            <select id="inputDepartamento" className="form-control" onChange={obtenerCiudades} ref={dpto}>
+            <select id="inputDepartamento" className="form-control selectpicker" onChange={obtenerCiudades} ref={dpto}>
                 <option key={-1} value={-1}>Seleccione un departamento...</option>
-                {departamentos.map(dpto => <option key={dpto.id} value={dpto.id}>{dpto.nombre}</option>)}
+                {departamentos.map(dpto => <option key={dpto.id} value={dpto.id}> {dpto.nombre}</option>)}
             </select>
 
         </div>

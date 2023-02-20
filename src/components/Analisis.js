@@ -1,42 +1,78 @@
-import React from 'react'
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+
+
 
 const Analisis = () => {
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">Navbar</a>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
 
-      <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">Action</a>
-              <a className="dropdown-item" href="#">Another action</a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form className="form-inline my-2 my-lg-0">
-          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+  const [pronostico, setPronostico] = useState([])
+
+  useEffect(() => {
+    
+    fetch("https://api.openweathermap.org/data/2.5/forecast?lat=-34&lon=-56&appid=e62b2530fdb5f4ba3559c07c8634e5c7&units=metric")
+      .then(r => r.json())
+      .then(datos => {
+        setPronostico(datos.list);
+
+      });
+
+
+
+  }, []);
+
+
+  return (
+    <div className="row">
+      <div className="col">
+        <h2>Pronóstico</h2>
+        <p>Texto de prueba</p>
+        <Link to="/">Ir al inicio</Link>
       </div>
-    </nav>
+      <div className="col">
+        <Bar options={{
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Pronóstico',
+            },
+          },
+        }} data={{
+          labels: pronostico.map((e, i) => i), //[0, 1, 2, 3, 4, 5, 6, 7]
+          datasets: [
+            {
+              label: 'Temperatura',
+              data: pronostico.map(t => t.main.temp), //[33, 32, 42]
+              backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            }
+          ],
+        }} />
+      </div>
+    </div>
   )
 }
 

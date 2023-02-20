@@ -20,7 +20,7 @@ const Dashboard = () => {
 
   return (
     <div className="container-fluid">
-      <div className="row">
+      <div className="row" id="columna">
 
         <div className="col-md-2" >
 
