@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+
 
 
 const Movimiento = ({ movim, cargarMovimientos }) => {
   //const rubros = useSelector(state => state.rubros.rubros);
   //console.log(rubros);
-  
+ 
+
   const obtenerRubro = (idRubro) => {
       //return rubros[0];
     switch (idRubro) {
@@ -65,6 +66,8 @@ const Movimiento = ({ movim, cargarMovimientos }) => {
   }
 
   return (
+
+    
     <tr>
       <th scope="row">{movim.id}</th>
       <td>{movim.concepto}</td>
@@ -75,6 +78,7 @@ const Movimiento = ({ movim, cargarMovimientos }) => {
       <td><NavLink href="#" onClick={eliminarMovimiento}>Eliminar</NavLink></td>
 
     </tr>
+
   )
 }
 
