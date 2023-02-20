@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { guardarMovimientos } from "../features/movimientosSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Movimiento from "./Movimiento";
 import { useNavigate } from "react-router-dom";
+
 
 const Movimientos = () => {
 
@@ -10,6 +11,9 @@ const Movimientos = () => {
   const dispatch = useDispatch();
   const movimientos = useSelector(store => store.movimientos.movimientos);
   const navigate = useNavigate();
+
+  const [isCheckedGastos, setIsCheckedGastos] = useState(false);
+  const [isCheckedIngresos, setIsCheckedIngresos] = useState(false);
 
   useEffect(() => {
     cargarMovimientos();
@@ -42,6 +46,10 @@ const Movimientos = () => {
 
   }
 
+  const listarGastos = () => movimientos.filter(mov => mov.categoria > 0 && mov.categoria <= 6);
+  const listarIngresos = () => movimientos.filter(mov => mov.categoria >= 7 && mov.categoria <= 12);
+
+
 
 
 
@@ -53,7 +61,22 @@ const Movimientos = () => {
         <div className='form-group col-md-10'>
           <div className='form-row'>
 
-            <h1 className='mb-4'>Movimientos</h1>
+            <h1 className='mb-4 col-12'>Movimientos</h1>
+
+            <div className="col mb-4">
+
+
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="checkBoxGastos" value="option1" checked={isCheckedGastos} onChange={() => setIsCheckedGastos(!isCheckedGastos)} />
+                <label className="form-check-label" htmlFor="checkBoxGastos">Gastos</label>
+              </div>
+              <div className="form-check">
+                <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" checked={isCheckedIngresos} onChange={() => setIsCheckedIngresos(!isCheckedIngresos)} />
+                <label className="form-check-label" htmlFor="inlineCheckbox2">Ingresos</label>
+              </div>
+            </div>
+
+
 
             <table className="table table-striped">
               <thead>
@@ -70,8 +93,16 @@ const Movimientos = () => {
               </thead>
               <tbody>
 
-                {movimientos.map(mov =>
-                  <Movimiento movim={mov} key={mov.id} cargarMovimientos = {cargarMovimientos}/>)}
+                {(!isCheckedGastos && !isCheckedIngresos) || (isCheckedGastos && isCheckedIngresos) ? movimientos.map(mov =>
+                  <Movimiento movim={mov} key={mov.id} cargarMovimientos={cargarMovimientos} />) :
+
+                  isCheckedIngresos ? listarIngresos().map(mov =>
+                    <Movimiento movim={mov} key={mov.id} cargarMovimientos={cargarMovimientos} />) :
+
+                    listarGastos().map(mov =>
+                      <Movimiento movim={mov} key={mov.id} cargarMovimientos={cargarMovimientos} />)
+
+                }
 
               </tbody>
             </table>
