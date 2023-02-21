@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { guardarRubros } from '../features/rubrosSlice';
 import { seleccionarRubro } from '../features/rubrosSlice';
+import { useOutletContext } from "react-router-dom";
 
 
 const Rubros = ({tipoRubro}) => {
@@ -12,26 +13,15 @@ const Rubros = ({tipoRubro}) => {
     
     const rubroElegido = useRef(null);
 
+    const [cargarRubros] = useOutletContext();
+
+
     const seleccionarRubroHandler = () =>{
         dispatch(seleccionarRubro(rubroElegido.current.value))
     }
 
     useEffect(() => {
-        fetch("https://dwallet.develotion.com/rubros.php", {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'apiKey': localStorage.getItem("apiKey"),
-
-        }})
-            .then(response => response.json())
-            .then(result => {
-                console.log(result.rubros);
-                dispatch(guardarRubros(result.rubros));
-
-            })
-            .catch(error => console.log('error', error));
-
+        cargarRubros();
     }, [])
 
 

@@ -3,10 +3,6 @@ import { NavLink } from "react-router-dom";
 
 
 const Movimiento = ({ movim, cargarMovimientos }) => {
-  //const rubros = useSelector(state => state.rubros.rubros);
-  //console.log(rubros);
-
-
 
 
   const obtenerRubro = (idRubro) => {

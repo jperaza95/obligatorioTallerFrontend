@@ -2,17 +2,19 @@ import { Link, Outlet, useNavigate } from "react-router-dom"
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { guardarMovimientos } from "../features/movimientosSlice";
+import { guardarRubros } from '../features/rubrosSlice';
 
 
 const Dashboard = () => {
   let navigate = useNavigate();
-  
+
   useEffect(() => {
     console.log(localStorage.getItem("apiKey"));
     if (localStorage.getItem("apiKey") === null) {
       navigate("/login");
-    }else{
+    } else {
       cargarMovimientos();
+      cargarRubros();
     }
 
 
@@ -47,6 +49,30 @@ const Dashboard = () => {
 
       })
       .catch(error => console.log('error', error));
+
+  }
+
+
+  const cargarRubros = () => {
+
+    fetch("https://dwallet.develotion.com/rubros.php", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'apiKey': localStorage.getItem("apiKey"),
+
+      }
+    })
+      .then(response => response.json())
+      .then(result => {
+        console.log(result.rubros);
+        dispatch(guardarRubros(result.rubros));
+
+      })
+      .catch(error => console.log('error', error));
+
+
+
 
   }
 
@@ -94,7 +120,7 @@ const Dashboard = () => {
           </nav>
         </div>
         <div className="col-md-8">
-          <Outlet/>
+          <Outlet context={[cargarMovimientos, cargarRubros]}/>
 
         </div>
       </div>

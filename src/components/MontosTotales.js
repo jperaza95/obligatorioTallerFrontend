@@ -29,7 +29,7 @@ const MontosTotales = () => {
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">Gastos: ${gastosTotales()}</li>
                 <li className="list-group-item">Ingresos: ${ingresosTotales()}</li>
-                <li className="list-group-item">Saldo Final: {ingresosTotales() - gastosTotales()}</li>
+                <li className="list-group-item">Saldo Final: ${ingresosTotales() - gastosTotales()}</li>
               </ul>
             </div>
 

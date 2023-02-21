@@ -1,16 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
-import { guardarMovimientos } from "../features/movimientosSlice";
 import { useEffect, useState } from "react";
 import Movimiento from "./Movimiento";
-import { useNavigate } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 
 
 const Movimientos = () => {
 
-  const idUsuario = localStorage.getItem("idUsuario");
-  const dispatch = useDispatch();
   const movimientos = useSelector(store => store.movimientos.movimientos);
-  const navigate = useNavigate();
+  const [cargarMovimientos] = useOutletContext();
 
   const [isCheckedGastos, setIsCheckedGastos] = useState(false);
   const [isCheckedIngresos, setIsCheckedIngresos] = useState(false);
@@ -19,39 +17,9 @@ const Movimientos = () => {
     cargarMovimientos();
   }, [])
 
-  const cargarMovimientos = () => {
-    fetch(`https://dwallet.develotion.com/movimientos.php?idUsuario=${idUsuario}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'apiKey': localStorage.getItem("apiKey"),
-
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        if (result.codigo === 401) {
-          alert("Sesion caduco");
-          localStorage.clear();
-          navigate("/login");
-
-        } else {
-          dispatch(guardarMovimientos(result.movimientos));
-        }
-
-
-      })
-      .catch(error => console.log('error', error));
-
-  }
 
   const listarGastos = () => movimientos.filter(mov => mov.categoria > 0 && mov.categoria <= 6);
   const listarIngresos = () => movimientos.filter(mov => mov.categoria >= 7 && mov.categoria <= 12);
-
-
-
-
 
 
   return (
