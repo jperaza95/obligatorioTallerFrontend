@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
-import { guardarRubros } from '../features/rubrosSlice';
 import { seleccionarRubro } from '../features/rubrosSlice';
 import { useOutletContext } from "react-router-dom";
 

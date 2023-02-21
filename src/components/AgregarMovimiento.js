@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Rubros from './Rubros';
 import { agregarMovimiento } from '../features/movimientosSlice';
 import { seleccionarRubro } from '../features/rubrosSlice';
+import MiModal from './MiModal';
+
 
 const AgregarMovimiento = ({ tipo }) => {
 
@@ -22,6 +24,7 @@ const AgregarMovimiento = ({ tipo }) => {
   const total = useRef(null);
   const fecha = useRef(null);
 
+  const [exito, setExito] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -114,6 +117,8 @@ const AgregarMovimiento = ({ tipo }) => {
           dispatch(agregarMovimiento(result));
           //limpia el rubro seleccionado
           dispatch(seleccionarRubro(-1));
+          setExito(true);
+          limpiarCampos();
 
 
         })
@@ -123,11 +128,20 @@ const AgregarMovimiento = ({ tipo }) => {
 
 
 
+  const limpiarCampos = () => {
+    document.querySelector("#inputConcepto").value = "";
+    document.querySelector("#inputRubro").value = "-1";
+    document.querySelector("#inputMedio").value = "-1";
+    document.querySelector("#inputTotal").value = "";
+    document.querySelector("#fecha").value = "";
+
+  }
 
 
 
+  const hayError = () => (errorUsuario || errorConcepto || errorRubro || errorMedio || errorTotal || errorFecha);
 
-  const hayError = () => errorUsuario || errorConcepto || errorRubro || errorMedio || errorTotal || errorFecha;
+
 
   const mostrarError = () => {
     if (errorConcepto) {
@@ -200,17 +214,40 @@ const AgregarMovimiento = ({ tipo }) => {
               <input type="date" id="fecha" name="fecha" ref={fecha}></input>
 
 
-              {(hayError()) && <div className="alert alert-danger col-md-8" role="alert" data-aria-autofocus="true">
-                {mostrarError()}
-              </div>}
 
             </div>
+
+            {(hayError()) && <div className="alert alert-danger col-md-8 text-center" role="alert" data-aria-autofocus="true">
+              {mostrarError()}
+            </div>
+            }
+
+            {exito && <div class="alert alert-success col-md-8 text-center" role="alert" id="movExitoso">
+              Movimiento agregado con éxito
+            </div>}
 
             <div className="form-group col-md-8 " >
 
-              <input type="button" className="btn btn-primary mt-4" value="Agregar" onClick={nuevoMovimiento} />
+              {/* <input type="button" className="btn btn-primary mt-4" value="Agregar" onClick={nuevoMovimiento} /> */}
+
+              <MiModal
+                tipoBoton="button"
+                title="Agregar Movimiento"
+                onSave={nuevoMovimiento}
+                error={existeError}
+                body="¿Desea agregar el movimiento?"
+              // concepto={concepto}
+              // categoria={rubro}
+              // total={total}
+              // fecha={fecha}
+
+              />
 
             </div>
+
+
+
+
 
 
 

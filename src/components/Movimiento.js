@@ -1,5 +1,4 @@
-import { NavLink } from "react-router-dom";
-
+import MiModal from './MiModal';
 
 
 const Movimiento = ({ movim, cargarMovimientos }) => {
@@ -67,8 +66,6 @@ const Movimiento = ({ movim, cargarMovimientos }) => {
 
   return (
 
-
-
     <>
       <tr>
         <th scope="row">{movim.id}</th>
@@ -78,33 +75,17 @@ const Movimiento = ({ movim, cargarMovimientos }) => {
         <td>{movim.total}</td>
         <td>{movim.fecha}</td>
         <td>
-
-          <NavLink href="#"  data-toggle="modal" data-target="#exampleModalCenter" >Eliminar</NavLink>
-
+          <MiModal
+            tipoBoton = "a"
+            title="Eliminar Movimiento"
+            body = {`¿Desea eliminar el movimiento ${movim.id} : "${movim.concepto}"?`}
+            onSave={eliminarMovimiento}
+          />
         </td>
 
       </tr>
 
 
-      <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLongTitle">Eliminar movimiento</h5>
-              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              ...
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-primary" onClick={eliminarMovimiento}>Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </>
 
 
