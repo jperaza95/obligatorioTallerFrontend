@@ -76,7 +76,7 @@ const AgregarMovimiento = ({ tipo }) => {
         }
       }
     }
-   
+
 
   }
 
@@ -175,13 +175,19 @@ const AgregarMovimiento = ({ tipo }) => {
 
             <div className="form-group col-md-8">
               <label htmlFor="inputMedio">Medio de pago</label>
-
-              <select id="inputMedio" className="form-control" ref={medio}>
+              {tipo === "gasto" ? <select id="inputMedio" className="form-control" ref={medio}>
                 <option value={"-1"}>Medio de pago...</option>
                 <option value={"Efectivo"}>Efectivo</option>
                 <option value={"Debito"}>Debito</option>
                 <option value={"Credito"}>Credito</option>
-              </select>
+              </select> :
+
+                <select id="inputMedio" className="form-control" ref={medio}>
+                  <option value={"-1"}>Medio de pago...</option>
+                  <option value={"Efectivo"}>Efectivo</option>
+                  <option value={"Banco"}>Banco</option>
+
+                </select>}
             </div>
 
             <div className="form-group col-md-8 " >

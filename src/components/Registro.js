@@ -45,7 +45,11 @@ const Registro = () => {
 
         if (result.codigo === 200) {
           localStorage.setItem("apiKey", result.apiKey);
-          dispatch(seleccionarUsuario(result.id));
+          localStorage.setItem("idUsuario", result.id);
+
+
+
+          //dispatch(seleccionarUsuario(result.id));
           navigate("/");
         } else {
           setError(true);

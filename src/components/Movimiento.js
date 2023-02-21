@@ -5,10 +5,12 @@ import { NavLink } from "react-router-dom";
 const Movimiento = ({ movim, cargarMovimientos }) => {
   //const rubros = useSelector(state => state.rubros.rubros);
   //console.log(rubros);
- 
+
+
+
 
   const obtenerRubro = (idRubro) => {
-      //return rubros[0];
+    //return rubros[0];
     switch (idRubro) {
       case 1:
         return "Alimentación";
@@ -65,19 +67,50 @@ const Movimiento = ({ movim, cargarMovimientos }) => {
 
   }
 
+
+
   return (
 
-    
-    <tr>
-      <th scope="row">{movim.id}</th>
-      <td>{movim.concepto}</td>
-      <td>{obtenerRubro(movim.categoria)}</td>
-      <td>{movim.medio}</td>
-      <td>{movim.total}</td>
-      <td>{movim.fecha}</td>
-      <td><NavLink href="#" onClick={eliminarMovimiento}>Eliminar</NavLink></td>
 
-    </tr>
+
+    <>
+      <tr>
+        <th scope="row">{movim.id}</th>
+        <td>{movim.concepto}</td>
+        <td>{obtenerRubro(movim.categoria)}</td>
+        <td>{movim.medio}</td>
+        <td>{movim.total}</td>
+        <td>{movim.fecha}</td>
+        <td>
+
+          <NavLink href="#"  data-toggle="modal" data-target="#exampleModalCenter" >Eliminar</NavLink>
+
+        </td>
+
+      </tr>
+
+
+      <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLongTitle">Eliminar movimiento</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              ...
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" className="btn btn-primary" onClick={eliminarMovimiento}>Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+
 
   )
 }

@@ -107,10 +107,6 @@ const Movimientos = () => {
               </tbody>
             </table>
 
-
-
-
-
           </div>
 
 
