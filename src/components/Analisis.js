@@ -31,37 +31,61 @@ const Analisis = () => {
 
 
   return (
-    <div>Analisis</div>
-    // <div className="row">
-    //   <div className="col">
-    //     <h2>Análisis</h2>
-    //     <p>Texto de prueba</p>
-    //     <Link to="/">Ir al inicio</Link>
-    //   </div>
-    //   <div className="col">
-    //     <Bar options={{
-    //       responsive: true,
-    //       plugins: {
-    //         legend: {
-    //           position: 'top',
-    //         },
-    //         title: {
-    //           display: true,
-    //           text: 'Pronóstico',
-    //         },
-    //       },
-    //     }} data={{
-    //       labels: pronostico.map((e, i) => i), //[0, 1, 2, 3, 4, 5, 6, 7]
-    //       datasets: [
-    //         {
-    //           label: 'Temperatura',
-    //           data: pronostico.map(t => t.main.temp), //[33, 32, 42]
-    //           backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    //         }
-    //       ],
-    //     }} />
-    //   </div>
-    // </div>
+
+    <div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <span data-feather="home"></span>
+              Dashboard <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file"></span>
+              Orders
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="users"></span>
+              Customers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="bar-chart-2"></span>
+              Reports
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="layers"></span>
+              Integrations
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p>Welcome to your dashboard!</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+
   )
 }
 

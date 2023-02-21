@@ -60,7 +60,6 @@ const Dashboard = () => {
       <div className="row" id="columna">
 
         <div className="col-md-2" >
-
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
             <a className="navbar-brand" href="#">Bienvenido</a>
 
