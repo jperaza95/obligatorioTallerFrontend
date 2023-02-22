@@ -1,11 +1,11 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Ciudades from './Ciudades';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Departamentos from './Departamentos';
-import { seleccionarUsuario } from '../features/usuarioSlice';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const Registro = () => {
@@ -17,13 +17,14 @@ const Registro = () => {
 
   const [error, setError] = useState(false);
 
-  const dispatch = useDispatch();
+
+  const [cargando, setCargando] = useState(false);
 
   let navigate = useNavigate();
 
   // Realiza el registro
   const realizarRegistro = () => {
-
+    setCargando(true);
     let objUsuario = {
       "usuario": usuario.current.value,
       "password": pass.current.value,
@@ -47,12 +48,11 @@ const Registro = () => {
           localStorage.setItem("apiKey", result.apiKey);
           localStorage.setItem("idUsuario", result.id);
 
-
-
-          //dispatch(seleccionarUsuario(result.id));
           navigate("/");
         } else {
           setError(true);
+          setCargando(false);
+
         }
       })
       .catch(error => console.log('error', error));
@@ -101,7 +101,15 @@ const Registro = () => {
 
             </div>
             <div>
-              <input type="button" className="btn btn-primary" value="Registro" onClick={realizarRegistro} /><br />
+
+              <button type="button" className="btn btn-primary mt-4" onClick={realizarRegistro}>
+                {cargando ? <Spinner as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true">
+                </Spinner> : "Registro"}
+              </button>
             </div>
 
             <hr />

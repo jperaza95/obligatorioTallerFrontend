@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 
 function MiModal(props) {
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -15,7 +16,9 @@ function MiModal(props) {
   return (
     <>
       {boton === "a" ? <NavLink href="#" onClick={handleShow}>Eliminar</NavLink> :
-        <input type="button" className="btn btn-primary mt-4" value="Agregar" onClick={() => !props.error() && handleShow()} />
+        <input type="button" className="btn btn-primary mt-4" value="Agregar" onClick={() =>
+          !props.error() && (handleShow(), props.setExito(false))
+        } />
       }
 
       <Modal show={show} onHide={handleClose} size="md"
@@ -32,7 +35,7 @@ function MiModal(props) {
           <Button variant="primary" onClick={() => {
             props.onSave();
             handleClose();
-            
+
           }}>
             Confirmar
           </Button>

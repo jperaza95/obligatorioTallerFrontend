@@ -18,6 +18,7 @@ const MontosTotales = () => {
 
 
   return (
+
     <div className="container mt-5">
       <div className='form-row justify-content-center'>
         <div className='form-group col-md-10'>
