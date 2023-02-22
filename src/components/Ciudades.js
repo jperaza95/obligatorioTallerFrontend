@@ -32,7 +32,7 @@ const Ciudades = () => {
 
   return (
 
-    <div className="form-group col-md-6">
+    <div className="form-group col-md-5">
       <label htmlFor="inputCiudad">Ciudad</label>
 
       <select id="inputCiudad" className="form-control" onChange={cargarCiudades}>

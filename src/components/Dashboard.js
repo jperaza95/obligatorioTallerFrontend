@@ -119,7 +119,7 @@ const Dashboard = () => {
             </div>
           </nav>
         </div>
-        <div className="col-md-8">
+        <div className="col-md-10">
           <Outlet context={[cargarMovimientos, cargarRubros]}/>
 
         </div>

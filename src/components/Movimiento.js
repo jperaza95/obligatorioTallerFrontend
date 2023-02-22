@@ -72,7 +72,7 @@ const Movimiento = ({ movim, cargarMovimientos }) => {
         <td>{movim.concepto}</td>
         <td>{obtenerRubro(movim.categoria)}</td>
         <td>{movim.medio}</td>
-        <td>{movim.total}</td>
+        <td>{"$ "+movim.total}</td>
         <td>{movim.fecha}</td>
         <td>
           <MiModal

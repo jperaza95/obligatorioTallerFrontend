@@ -70,16 +70,19 @@ const Login = () => {
 
             <div className='form-row justify-content-center'>
 
-                <h1 className="form-group col-md-8 ">Login</h1>
+                <div className='col-6'>
 
-                <div className="form-group col-md-8 " >
+
+                <h1 className="form-group ">Login</h1>
+
+                <div className="form-group " >
                     <label htmlFor="inputEmail4">Usuario</label>
                     <input type="text" className="form-control" id="inputUsuario" placeholder="Usuario" value={username} onChange={handleUsernameChange} />
                 </div>
 
 
 
-                <div className="form-group col-md-8">
+                <div className="form-group">
                     <label htmlFor="inputPassword4">Password</label>
                     <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={password} onChange={handlePasswordChange}/>
 
@@ -93,6 +96,7 @@ const Login = () => {
                     <hr></hr>
                     <Link to="/registro">Ir a Registro</Link>
 
+                </div>
                 </div>
 
             </div>
