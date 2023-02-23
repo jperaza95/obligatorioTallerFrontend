@@ -7,6 +7,7 @@ import { guardarRubros } from '../features/rubrosSlice';
 
 const Dashboard = () => {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log(localStorage.getItem("apiKey"));
@@ -23,32 +24,38 @@ const Dashboard = () => {
 
 
   const idUsuario = localStorage.getItem("idUsuario");
-  const dispatch = useDispatch();
 
   const cargarMovimientos = () => {
-    fetch(`https://dwallet.develotion.com/movimientos.php?idUsuario=${idUsuario}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'apiKey': localStorage.getItem("apiKey"),
+    if (localStorage.getItem("apiKey") === null) {
+      navigate("/login");
+    } else {
 
-      }
-    })
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-        if (result.codigo === 401) {
-          alert("Sesion caduco");
-          localStorage.clear();
-          navigate("/login");
+      fetch(`https://dwallet.develotion.com/movimientos.php?idUsuario=${idUsuario}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'apiKey': localStorage.getItem("apiKey"),
 
-        } else {
-          dispatch(guardarMovimientos(result.movimientos));
         }
-
-
       })
-      .catch(error => console.log('error', error));
+        .then(response => response.json())
+        .then(result => {
+          console.log(result);
+          if (result.codigo === 401) {
+            alert("Sesion caduco");
+            localStorage.clear();
+            navigate("/login");
+
+          } else {
+            dispatch(guardarMovimientos(result.movimientos));
+          }
+
+
+        })
+        .catch(error => console.log('error', error));
+
+    }
+
 
   }
 
@@ -120,7 +127,7 @@ const Dashboard = () => {
           </nav>
         </div>
         <div className="col-md-10">
-          <Outlet context={[cargarMovimientos, cargarRubros]}/>
+          <Outlet context={[cargarMovimientos, cargarRubros]} />
 
         </div>
       </div>

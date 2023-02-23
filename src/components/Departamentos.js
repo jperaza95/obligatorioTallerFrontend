@@ -26,13 +26,14 @@ const Departamentos = () => {
             .then(response => response.json())
             .then(result => {
 
-                if(result.codigo === 401){
-                    alert("Sesion caduco");
-                    localStorage.clear();
-                    navigate("/login");          
-                  }else{
-                      dispatch(guardarDepartamentos(result.departamentos));             
-                  }
+                // if(result.codigo === 401){
+                //     alert("Sesion caduco");
+                //     localStorage.clear();
+                //     navigate("/login");          
+                //   }else{
+                //       dispatch(guardarDepartamentos(result.departamentos));             
+                //   }
+                dispatch(guardarDepartamentos(result.departamentos));             
 
 
             })

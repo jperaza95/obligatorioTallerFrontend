@@ -4,10 +4,10 @@ import Rubros from './Rubros';
 import { agregarMovimiento } from '../features/movimientosSlice';
 import { seleccionarRubro } from '../features/rubrosSlice';
 import MiModal from './MiModal';
-import { useEffect } from 'react';
 
 
 const AgregarMovimiento = ({ tipo }) => {
+
 
   //Errores:
   const [errorUsuario, setErrorUsuario] = useState(false);
@@ -31,51 +31,6 @@ const AgregarMovimiento = ({ tipo }) => {
 
 
   const idUsuario = localStorage.getItem("idUsuario");
-
-  // useEffect(() => {
-  //   if (idUsuario === null) {
-  //     setErrorUsuario(true);
-  //   }
-
-  //   else {
-  //     setErrorUsuario(false);
-  //   }
-
-  //   if (concepto.current.value === "") {
-  //     setErrorConcepto(true);
-  //   } else {
-  //     setErrorConcepto(false)
-  //   }
-
-
-  //   if (rubro === -1 || rubro === null) {
-  //     setErrorRubro(true);
-
-  //   } else {
-  //     setErrorRubro(false);
-  //   }
-
-  //   if (medio.current.value === "-1") {
-  //     setErrorMedio(true);
-  //   } else {
-  //     setErrorMedio(false);
-  //   }
-
-  //   if (total.current.value === "") {
-  //     setErrorTotal(true);
-  //   } else {
-  //     setErrorTotal(false);
-  //   }
-
-  //   if (fecha.current.value === "") {
-  //     setErrorFecha(true);
-  //   } else {
-  //     setErrorFecha(false);
-  //   }
-
-
-  // }
-  // , [idUsuario,concepto,rubro,medio,total,fecha])
 
 
   const existeError = () => {
@@ -105,14 +60,14 @@ const AgregarMovimiento = ({ tipo }) => {
           } else {
             setErrorMedio(false);
 
-            if (total.current.value === "") {
+            if (!isNaN(total.current.value) && Number(total.current.value)<0) {
               setErrorTotal(true);
               return true;
 
             } else {
               setErrorTotal(false);
 
-              if (fecha.current.value === "") {
+              if (fecha.current.value === "" && Date(fecha.current.value)>Date.now) {
                 setErrorFecha(true);
                 return true;
 
@@ -186,7 +141,6 @@ const AgregarMovimiento = ({ tipo }) => {
   }
 
 
-
   const hayError = () => errorUsuario || errorConcepto || errorRubro || errorMedio || errorTotal || errorFecha;
 
 
@@ -202,7 +156,7 @@ const AgregarMovimiento = ({ tipo }) => {
     } else if (errorRubro) {
       return "Ingrese Rubro";
     } else if (errorTotal) {
-      return "Ingrese Total";
+      return "Error al ingresar total";
     } else if (errorFecha) {
       return "Ingrese Fecha";
 

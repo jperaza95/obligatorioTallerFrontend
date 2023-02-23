@@ -12,6 +12,7 @@ import MontosTotales from './components/MontosTotales';
 import Analisis from './components/Analisis';
 import AgregarMovimiento from './components/AgregarMovimiento';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
@@ -24,13 +25,15 @@ function App() {
           <Route path='registro' element={<Registro />} />
 
           <Route path='/' element={<Dashboard />}>
-            <Route path='agregargasto' element={<AgregarMovimiento tipo="gasto"/>} />
+            <Route path='agregargasto' element={<AgregarMovimiento tipo="gasto" />} />
             <Route path='agregaringreso' element={<AgregarMovimiento tipo="ingreso" />} />
             <Route path='movimientos' element={<Movimientos />} />
             <Route path='totales' element={<MontosTotales />} />
             <Route path='analisis' element={<Analisis />} />
 
           </Route>
+          <Route path='*' element={<NotFound />}/>
+
         </Routes>
       </BrowserRouter>
     </Provider>

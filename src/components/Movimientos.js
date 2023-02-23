@@ -13,10 +13,6 @@ const Movimientos = () => {
   const [isCheckedGastos, setIsCheckedGastos] = useState(false);
   const [isCheckedIngresos, setIsCheckedIngresos] = useState(false);
 
-  useEffect(() => {
-    cargarMovimientos();
-  }, [])
-
 
   const listarGastos = () => movimientos.filter(mov => mov.categoria > 0 && mov.categoria <= 6);
   const listarIngresos = () => movimientos.filter(mov => mov.categoria >= 7 && mov.categoria <= 12);

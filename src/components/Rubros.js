@@ -14,7 +14,6 @@ const Rubros = ({tipoRubro}) => {
 
     const [cargarRubros] = useOutletContext();
 
-
     const seleccionarRubroHandler = () =>{
         dispatch(seleccionarRubro(rubroElegido.current.value))
     }

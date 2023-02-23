@@ -25,6 +25,8 @@ const Registro = () => {
   // Realiza el registro
   const realizarRegistro = () => {
     setCargando(true);
+    
+
     let objUsuario = {
       "usuario": usuario.current.value,
       "password": pass.current.value,
@@ -65,7 +67,7 @@ const Registro = () => {
 
       <div className='form-row justify-content-center'>
 
-        <div className='col-6'>
+        <div className='col-6 p-3 mt-5'>
           <h1 className="form-group">Registro</h1>
 
           <div className="form-group" >

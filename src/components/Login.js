@@ -8,7 +8,7 @@ const Login = () => {
 
     let navigate = useNavigate();
 
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
 
     const [cargando, setCargando] = useState(false);
 
@@ -54,25 +54,26 @@ const Login = () => {
 
                     navigate("/");
                 } else {
-                    setError(true);
+                    setError(result.mensaje);
                     setCargando(false);
 
                 }
             })
             .catch(error => {
-                setError(true);
-                console.log('error', error)
+                // setError(result.mensaje);
+                console.log('error', error);
             });
 
     }
 
 
     return (
+
         <div className="container mt-5">
 
             <div className='form-row justify-content-center'>
 
-                <div className='col-6'>
+                <div className='col-6 p-3 mt-5'>
 
 
                     <h1 className="form-group ">Login</h1>
@@ -88,8 +89,8 @@ const Login = () => {
                         <label htmlFor="inputPassword4">Password</label>
                         <input type="password" className="form-control" id="inputPassword" placeholder="Password" value={password} onChange={handlePasswordChange} />
 
-                        {error && <div className="alert alert-danger col-md mt-3" role="alert" data-aria-autofocus="true">
-                            Error en usuario y/o contraseña
+                        {(error!==null) && <div className="alert alert-danger col-md mt-3" role="alert" data-aria-autofocus="true">
+                            {error}
                         </div>}
                         <button type="button" className="btn btn-primary mt-4" onClick={realizarLogin} disabled={isDisabled}>
                             {cargando ? <Spinner as="span"
