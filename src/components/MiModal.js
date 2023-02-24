@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { NavLink } from "react-router-dom";
 
+
 function MiModal(props) {
 
   const [show, setShow] = useState(false);

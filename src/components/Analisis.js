@@ -426,11 +426,11 @@ const Analisis = () => {
             <label htmlFor="inputRubro">Comparativo entre últimos dos gastos</label>
             <select id="inputRubro" className="form-control" onChange={seleccionarRubroHandler} ref={rubroElegido}>
               <option key={-1} value={-1}>Seleccione un rubro...</option>
-              {rubros.map(rubro => <option key={rubro.id} value={rubro.id}>{rubro.nombre}</option>)}
+              {rubros.map(rubro => rubro.id<=6 &&<option key={rubro.id} value={rubro.id}>{rubro.nombre}</option>)}
             </select>
 
-            <div className="form-group col-6 " >
-              <h5>{mensajeAnalisis}</h5>
+            <div className="form-group" >
+              <h1 className="lead">{mensajeAnalisis}</h1>
             </div>
 
           </div>
