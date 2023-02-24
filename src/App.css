@@ -38,10 +38,6 @@
   }
 }
 
-/* .active {
-  background-color: #333;
-  color: #F0F0F0;
-} */
 
 #fecha {
   border-color: silver;
@@ -61,33 +57,9 @@
 
 }
 
-/*
- @media (max-width: 991px) {
-  .navbar,
-  .navbar-collapse {
-    flex-direction: row;
-  }
-  .navbar-expand-lg .navbar-nav {
-    flex-direction: row;
-  }
-  .navbar {
 
-    width: 100%;
-    align-items: flex-start;
-  }
-  .navbar-brand {
-    margin-left: 0.5em;
-    padding-bottom: 0;
-    border-bottom: 4px solid #464646;
-  }
-  form input {
-    margin-bottom: 0.7em;
-  }
 
-}
-*/
-
-@media (min-width: 769px) {
+@media (min-width: 768px) {
   .navbar,
   .navbar-collapse {
     flex-direction: column;

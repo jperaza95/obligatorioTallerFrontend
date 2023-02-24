@@ -4,6 +4,7 @@ import Rubros from './Rubros';
 import { agregarMovimiento } from '../features/movimientosSlice';
 import { seleccionarRubro } from '../features/rubrosSlice';
 import MiModal from './MiModal';
+import { useOutletContext } from "react-router-dom";
 
 
 const AgregarMovimiento = ({ tipo }) => {
@@ -16,6 +17,7 @@ const AgregarMovimiento = ({ tipo }) => {
   const [errorMedio, setErrorMedio] = useState(false);
   const [errorTotal, setErrorTotal] = useState(false);
   const [errorFecha, setErrorFecha] = useState(false);
+  const [cargarMovimientos] = useOutletContext();
 
 
 
@@ -47,7 +49,7 @@ const AgregarMovimiento = ({ tipo }) => {
         return true;
       } else {
         setErrorConcepto(false);
-        if (rubro === -1 || rubro === null) {
+        if (rubro === "-1" || rubro === null) {
           setErrorRubro(true);
           return true;
 
@@ -60,14 +62,14 @@ const AgregarMovimiento = ({ tipo }) => {
           } else {
             setErrorMedio(false);
 
-            if (!isNaN(total.current.value) && Number(total.current.value)<0) {
+            if (total.current.value === "" || isNaN(total.current.value) || Number(total.current.value) < 0) {
               setErrorTotal(true);
               return true;
 
             } else {
               setErrorTotal(false);
 
-              if (fecha.current.value === "" && Date(fecha.current.value)>Date.now) {
+              if (fecha.current.value === "") {
                 setErrorFecha(true);
                 return true;
 
@@ -120,6 +122,7 @@ const AgregarMovimiento = ({ tipo }) => {
           dispatch(agregarMovimiento(result));
           //limpia el rubro seleccionado
           dispatch(seleccionarRubro(-1));
+          cargarMovimientos();
           setExito(true);
           limpiarCampos();
 
@@ -167,31 +170,24 @@ const AgregarMovimiento = ({ tipo }) => {
 
       return "";
     }
-    //-----------------
-    // let cadena = 'Faltan ingresar los siguentes campos: ';
 
-    // if (errorConcepto) {
-    //   cadena += "Concepto ";
-    // }
-    // else if (errorUsuario) {
-    //   cadena += " Usuario ";
-    // } else if (errorRubro) {
-    //   cadena += " Rubro ";
-    // } else if (errorTotal) {
-    //   cadena += " Total ";
-    // } else if (errorFecha) {
-    //   cadena += " Fecha ";
 
-    // } else if (errorMedio) {
-    //   cadena += " Medio ";
+  }
 
-    // }
+  const mostrarDatosFormulario = () => {
 
-    // return cadena;
+    return {
+      "Concepto": concepto.current.value,
+      "Categoria": rubro,
+      "Total": `$ ${total.current.value}`,
+      "Medio": medio.current.value,
+      "Fecha": fecha.current.value
+    }
 
 
 
   }
+
 
 
   return (
@@ -231,15 +227,23 @@ const AgregarMovimiento = ({ tipo }) => {
             </div>
 
             <div className="form-group col-md-8 " >
-              <label htmlFor="inputTotal">Total</label>
-              <input type="text" className="form-control" id="inputTotal" placeholder="Total" ref={total} />
+
+              <label class="sr-only" for="inputTotal">Total</label>
+              <div class="input-group mb-2 mr-sm-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">$</div>
+                </div>
+                <input type="text" class="form-control" id="inputTotal" placeholder="Total" ref={total}/>
+              </div>
+
+
             </div>
+
+
 
 
             <div className="form-group col-md-8 " >
               <input type="date" id="fecha" name="fecha" ref={fecha}></input>
-
-
 
             </div>
 
@@ -260,23 +264,12 @@ const AgregarMovimiento = ({ tipo }) => {
                 onSave={nuevoMovimiento}
                 error={existeError}
                 body="¿Desea agregar el movimiento?"
-                setExito = {setExito}
-              // concepto={concepto}
-              // categoria={rubro}
-              // total={total}
-              // fecha={fecha}
+                setExito={setExito}
+                mostrarDatosFormulario={mostrarDatosFormulario}
 
               />
 
             </div>
-
-
-
-
-
-
-
-
 
           </div>
 
