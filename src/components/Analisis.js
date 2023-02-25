@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { seleccionarRubro } from '../features/rubrosSlice';
 
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -17,6 +16,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { Line } from 'react-chartjs-2';
+import IrAlInicio from "./IrAlInicio";
 
 ChartJS.register(
   CategoryScale,
@@ -38,7 +38,6 @@ const Analisis = () => {
   const movimientos = useSelector(store => store.movimientos.movimientos);
   const listarGastos = () => movimientos.filter(mov => mov.categoria > 0 && mov.categoria <= 6);
   const listarIngresos = () => movimientos.filter(mov => mov.categoria >= 7 && mov.categoria <= 12);
-
 
   const rubros = useSelector(state => state.rubros.rubros);
   const rubroElegido = useRef(null);
@@ -95,129 +94,175 @@ const Analisis = () => {
     }
   };
 
+  // const totalGastosPorMes = (gastos) => {
+  //   console.log(gastos);
+
+  //   let montoTotalPorMes2023 = [
+  //     {
+  //       Mes: "Enero",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Febrero",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Marzo",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Abril",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Mayo",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Junio",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Julio",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Agosto",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Setiembre",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Octubre",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Noviembre",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Diciembre",
+  //       Total: 0
+  //     },
+  //   ]
+
+  //   let montoTotalPorMes2022 = [
+  //     {
+  //       Mes: "Enero",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Febrero",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Marzo",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Abril",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Mayo",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Junio",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Julio",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Agosto",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Setiembre",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Octubre",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Noviembre",
+  //       Total: 0
+  //     },
+  //     {
+  //       Mes: "Diciembre",
+  //       Total: 0
+  //     },
+  //   ]
+  //   for (const gasto of gastos) {
+  //     let fechaDelGasto = new Date(gasto.fecha);
+  //     let mesDelGasto = parseInt(fechaDelGasto.getMonth());
+  //     let yearGasto = parseInt(fechaDelGasto.getFullYear());
+
+  //     if (yearGasto === 2023) {
+
+  //       montoTotalPorMes2023[mesDelGasto].Total += gasto.total;
+
+  //     } else if (yearGasto === 2022) {
+
+  //       montoTotalPorMes2022[mesDelGasto].Total += gasto.total;
+
+  //     }
+
+  //   }
+  //   let montosTotalesPorMes = [montoTotalPorMes2023, montoTotalPorMes2022];
+  //   console.log(montosTotalesPorMes);
+  //   return montosTotalesPorMes;
+  // };
+
   const totalGastosPorMes = (gastos) => {
-    console.log(gastos);
+    if (gastos) {
 
-    let montoTotalPorMes2023 = [
-      {
-        Mes: "Enero",
-        Total: 0
-      },
-      {
-        Mes: "Febrero",
-        Total: 0
-      },
-      {
-        Mes: "Marzo",
-        Total: 0
-      },
-      {
-        Mes: "Abril",
-        Total: 0
-      },
-      {
-        Mes: "Mayo",
-        Total: 0
-      },
-      {
-        Mes: "Junio",
-        Total: 0
-      },
-      {
-        Mes: "Julio",
-        Total: 0
-      },
-      {
-        Mes: "Agosto",
-        Total: 0
-      },
-      {
-        Mes: "Setiembre",
-        Total: 0
-      },
-      {
-        Mes: "Octubre",
-        Total: 0
-      },
-      {
-        Mes: "Noviembre",
-        Total: 0
-      },
-      {
-        Mes: "Diciembre",
-        Total: 0
-      },
-    ]
-
-    let montoTotalPorMes2022 = [
-      {
-        Mes: "Enero",
-        Total: 0
-      },
-      {
-        Mes: "Febrero",
-        Total: 0
-      },
-      {
-        Mes: "Marzo",
-        Total: 0
-      },
-      {
-        Mes: "Abril",
-        Total: 0
-      },
-      {
-        Mes: "Mayo",
-        Total: 0
-      },
-      {
-        Mes: "Junio",
-        Total: 0
-      },
-      {
-        Mes: "Julio",
-        Total: 0
-      },
-      {
-        Mes: "Agosto",
-        Total: 0
-      },
-      {
-        Mes: "Setiembre",
-        Total: 0
-      },
-      {
-        Mes: "Octubre",
-        Total: 0
-      },
-      {
-        Mes: "Noviembre",
-        Total: 0
-      },
-      {
-        Mes: "Diciembre",
-        Total: 0
-      },
-    ]
-    for (const gasto of gastos) {
-      let fechaDelGasto = new Date(gasto.fecha);
-      let mesDelGasto = parseInt(fechaDelGasto.getMonth());
-      let yearGasto = parseInt(fechaDelGasto.getFullYear());
-
-      if (yearGasto === 2023) {
-
-        montoTotalPorMes2023[mesDelGasto].Total += gasto.total;
-
-      } else if (yearGasto === 2022) {
-
-        montoTotalPorMes2022[mesDelGasto].Total += gasto.total;
-
-      }
-
+      const montoTotalPorMes = gastos.reduce((acc, gasto) => {
+        const { fecha, total } = gasto;
+        const [year, month] = fecha.split('-');
+        const mesIndex = parseInt(month) - 1;
+        const yearIndex = year === '2023' ? 0 : 1;
+        acc[yearIndex][mesIndex].Total += total;
+        return acc;
+      }, [
+        [
+          { Mes: 'Enero', Total: 0 },
+          { Mes: 'Febrero', Total: 0 },
+          { Mes: 'Marzo', Total: 0 },
+          { Mes: 'Abril', Total: 0 },
+          { Mes: 'Mayo', Total: 0 },
+          { Mes: 'Junio', Total: 0 },
+          { Mes: 'Julio', Total: 0 },
+          { Mes: 'Agosto', Total: 0 },
+          { Mes: 'Setiembre', Total: 0 },
+          { Mes: 'Octubre', Total: 0 },
+          { Mes: 'Noviembre', Total: 0 },
+          { Mes: 'Diciembre', Total: 0 },
+        ],
+        [
+          { Mes: 'Enero', Total: 0 },
+          { Mes: 'Febrero', Total: 0 },
+          { Mes: 'Marzo', Total: 0 },
+          { Mes: 'Abril', Total: 0 },
+          { Mes: 'Mayo', Total: 0 },
+          { Mes: 'Junio', Total: 0 },
+          { Mes: 'Julio', Total: 0 },
+          { Mes: 'Agosto', Total: 0 },
+          { Mes: 'Setiembre', Total: 0 },
+          { Mes: 'Octubre', Total: 0 },
+          { Mes: 'Noviembre', Total: 0 },
+          { Mes: 'Diciembre', Total: 0 },
+        ],
+      ]);
+      console.log(montoTotalPorMes);
+      return montoTotalPorMes;
     }
-    let montosTotalesPorMes = [montoTotalPorMes2023, montoTotalPorMes2022];
-    console.log(montosTotalesPorMes);
-    return montosTotalesPorMes;
+    return ;
   };
 
   const compararGastosPorRubro = (rubro) => {
@@ -259,23 +304,23 @@ const Analisis = () => {
   };
 
   useEffect(() => {
-
     setGastos(listarGastos());
     setIngresos(listarIngresos());
-
-
   }, []);
 
   useEffect(() => {
-    let montosTotalesPorMes = totalGastosPorMes(gastos);
-    console.log(montosTotalesPorMes);
-    console.log(montosTotalesPorMes[0]);
-    console.log(montosTotalesPorMes[1]);
-    setTotalGM2023(montosTotalesPorMes[0]);
-    setTotalGM2022(montosTotalesPorMes[1]);
+    if(gastos){
 
-
-  }, [gastos]);
+      let montosTotalesPorMes = totalGastosPorMes(gastos);
+      console.log(montosTotalesPorMes);
+      console.log(montosTotalesPorMes[0]);
+      console.log(montosTotalesPorMes[1]);
+      setTotalGM2023(montosTotalesPorMes[0]);
+      setTotalGM2022(montosTotalesPorMes[1]);
+    }
+      
+      
+    }, [gastos]);
 
 
   const options3 = {
@@ -324,12 +369,14 @@ const Analisis = () => {
 
             {/* Titulo */}
 
-            <div className="col-12">
+            <IrAlInicio titulo={"Análisis"} descripcion="Gráficas relativas a los movimientos"></IrAlInicio>
+
+            {/* <div className="col-12">
               <h2>Análisis</h2>
               <p>Gráficas relativas a los movimientos</p>
               <Link to="/">Ir al inicio</Link>
 
-            </div>
+            </div> */}
 
 
             {/*---------------------------------------------*/}
@@ -426,10 +473,10 @@ const Analisis = () => {
             <label htmlFor="inputRubro">Comparativo entre últimos dos gastos</label>
             <select id="inputRubro" className="form-control" onChange={seleccionarRubroHandler} ref={rubroElegido}>
               <option key={-1} value={-1}>Seleccione un rubro...</option>
-              {rubros.map(rubro => rubro.id<=6 &&<option key={rubro.id} value={rubro.id}>{rubro.nombre}</option>)}
+              {rubros.map(rubro => rubro.id <= 6 && <option key={rubro.id} value={rubro.id}>{rubro.nombre}</option>)}
             </select>
 
-            <div className="form-group" >
+            <div className="form-group mt-5" >
               <h1 className="lead">{mensajeAnalisis}</h1>
             </div>
 

@@ -25,40 +25,50 @@ const Registro = () => {
   // Realiza el registro
   const realizarRegistro = () => {
     setCargando(true);
-    
+    if (validarRegistro()) {
+      let objUsuario = {
+        "usuario": usuario.current.value,
+        "password": pass.current.value,
+        "idDepartamento": dpto,
+        "idCiudad": city
+      }
+      console.log(objUsuario);
+      let requestOptions = {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(objUsuario),
+        redirect: 'follow'
+      };
 
-    let objUsuario = {
-      "usuario": usuario.current.value,
-      "password": pass.current.value,
-      "idDepartamento": dpto,
-      "idCiudad": city
+      fetch("https://dwallet.develotion.com/usuarios.php", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          console.log(result);
+
+          if (result.codigo === 200) {
+            localStorage.setItem("apiKey", result.apiKey);
+            localStorage.setItem("idUsuario", result.id);
+
+            navigate("/");
+          } else {
+            setError(true);
+            setCargando(false);
+
+          }
+        })
+        .catch(error => console.log('error', error));
+    } else {
+      setError(true);
+      setCargando(false);
+
     }
 
-    let requestOptions = {
-      method: 'POST',
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(objUsuario),
-      redirect: 'follow'
-    };
 
-    fetch("https://dwallet.develotion.com/usuarios.php", requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
+  }
 
-        if (result.codigo === 200) {
-          localStorage.setItem("apiKey", result.apiKey);
-          localStorage.setItem("idUsuario", result.id);
-
-          navigate("/");
-        } else {
-          setError(true);
-          setCargando(false);
-
-        }
-      })
-      .catch(error => console.log('error', error));
-
+  const validarRegistro = () => {
+    console.log(usuario.current.value.trim(), pass.current.value.trim(), dpto, city);
+    return dpto > 0 && city > 0 && usuario.current.value.length > 5 && pass.current.value.length > 5;
   }
 
 

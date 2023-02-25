@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { guardarMovimientos } from "../features/movimientosSlice";
 import { guardarRubros } from '../features/rubrosSlice';
-
+import fondo from '../images/logofinance.png'; 
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -126,9 +126,9 @@ const Dashboard = () => {
             </div>
           </nav>
         </div>
-        <div className="col-md-10">
-          <Outlet context={[cargarMovimientos, cargarRubros]} />
 
+        <div className="col-md-10 justify-content-center">
+          <Outlet context={[cargarMovimientos, cargarRubros]} />
         </div>
       </div>
 

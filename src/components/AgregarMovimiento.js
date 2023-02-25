@@ -5,7 +5,7 @@ import { agregarMovimiento } from '../features/movimientosSlice';
 import { seleccionarRubro } from '../features/rubrosSlice';
 import MiModal from './MiModal';
 import { useOutletContext } from "react-router-dom";
-
+import IrAlInicio from './IrAlInicio';
 
 const AgregarMovimiento = ({ tipo }) => {
 
@@ -196,12 +196,13 @@ const AgregarMovimiento = ({ tipo }) => {
         <div className='form-group col-md-10'>
           <div className='form-row'>
 
-            {tipo === "gasto" ? <h1 className="form-group col-md-8 ">Agregar gasto</h1> :
 
-              <h1 className="form-group col-md-8 ">Agregar ingreso</h1>}
+            {tipo === "gasto" ? <IrAlInicio titulo={"Agregar gasto"} descripcion="Formulario para registro de gastos"></IrAlInicio> :
+
+              <IrAlInicio titulo={"Agregar Ingreso"} descripcion="Formulario para registro de ingresos"></IrAlInicio>}
 
 
-            <div className="form-group col-md-8 " >
+            <div className="form-group col-md-8 mt-4" >
               <label htmlFor="inputConcepto">Concepto</label>
               <input ref={concepto} type="text" className="form-control" id="inputConcepto" placeholder="Concepto" />
             </div>
@@ -233,7 +234,7 @@ const AgregarMovimiento = ({ tipo }) => {
                 <div class="input-group-prepend">
                   <div class="input-group-text">$</div>
                 </div>
-                <input type="text" class="form-control" id="inputTotal" placeholder="Total" ref={total}/>
+                <input type="text" class="form-control" id="inputTotal" placeholder="Total" ref={total} />
               </div>
 
 

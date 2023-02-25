@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Movimiento from "./Movimiento";
 import { useOutletContext } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import IrAlInicio from "./IrAlInicio";
 
 
 const Movimientos = () => {
@@ -25,9 +25,9 @@ const Movimientos = () => {
         <div className='form-group col-md-10'>
           <div className='form-row'>
 
-            <h1 className='mb-4 col-12'>Movimientos</h1>
-
-            <div className="col mb-4">
+            
+            <IrAlInicio titulo={"Movimientos"} descripcion="Listado de ingresos y gastos"></IrAlInicio>
+            <div className="col mb-4 mt-4">
 
 
               <div className="form-check">
