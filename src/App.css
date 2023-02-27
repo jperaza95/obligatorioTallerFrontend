@@ -41,17 +41,17 @@
 
 #fecha {
   border-color: silver;
-  border-style: solid; 
+  border-style: solid;
   border-radius: 5%;
   border-width: 1px;
   font-family: Arial, Helvetica, sans-serif;
-  color:grey;
+  color: grey;
   margin-top: 1rem;
   padding: 6px 12px;
 
 }
 
-#fecha:hover{
+#fecha:hover {
   border-color: cornflowerblue;
 
 
@@ -60,35 +60,66 @@
 
 
 @media (min-width: 768px) {
+
   .navbar,
   .navbar-collapse {
     flex-direction: column;
   }
+
   .navbar-expand-lg .navbar-nav {
     flex-direction: column;
   }
+
   .navbar {
 
     height: 100%;
     align-items: flex-start;
   }
+
   .navbar-brand {
     margin-left: 0.5em;
     padding-bottom: 0;
     border-bottom: 2px solid cornsilk;
   }
+
   form input {
     margin-bottom: 0.7em;
   }
 
-} 
+}
 
-#columna{
+#columna {
   height: 100vh;
 }
 
-#fondo{
-  width: 90%;
-  height: 90%;  
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.row {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+#fondo::before {
+  content: "";
+  background-image: url(./images/finanzas.webp);
+  opacity: 0.4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+}
+
+table, .grafico{
+  background-color: white;
+  border-radius: 5px;
 }
 

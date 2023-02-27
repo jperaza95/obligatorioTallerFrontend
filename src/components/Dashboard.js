@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { guardarMovimientos } from "../features/movimientosSlice";
 import { guardarRubros } from '../features/rubrosSlice';
-import fondo from '../images/logofinance.png'; 
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -94,7 +93,7 @@ const Dashboard = () => {
 
         <div className="col-md-2" >
           <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a className="navbar-brand" href="#">Bienvenido</a>
+            <Link className="navbar-brand" to="/">Bienvenido</Link>
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
@@ -103,7 +102,6 @@ const Dashboard = () => {
 
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  {/* <a className="nav-link" href="/agregargasto">Agregar gasto <span className="sr-only">(current)</span></a> */}
                   <Link to="/agregargasto" className="nav-link">Agregar gasto<span className="sr-only">(current)</span></Link>
                 </li>
                 <li className="nav-item">
@@ -127,7 +125,7 @@ const Dashboard = () => {
           </nav>
         </div>
 
-        <div className="col-md-10 justify-content-center">
+        <div className="col-md-10 justify-content-center" id="fondo">
           <Outlet context={[cargarMovimientos, cargarRubros]} />
         </div>
       </div>

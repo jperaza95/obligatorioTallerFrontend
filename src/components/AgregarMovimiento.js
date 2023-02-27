@@ -191,7 +191,7 @@ const AgregarMovimiento = ({ tipo }) => {
 
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 componente">
       <div className='form-row justify-content-center'>
         <div className='form-group col-md-10'>
           <div className='form-row'>
@@ -229,12 +229,12 @@ const AgregarMovimiento = ({ tipo }) => {
 
             <div className="form-group col-md-8 " >
 
-              <label class="sr-only" for="inputTotal">Total</label>
-              <div class="input-group mb-2 mr-sm-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">$</div>
+              <label className="sr-only" htmlFor="inputTotal">Total</label>
+              <div className="input-group mb-2 mr-sm-2">
+                <div className="input-group-prepend">
+                  <div className="input-group-text">$</div>
                 </div>
-                <input type="text" class="form-control" id="inputTotal" placeholder="Total" ref={total} />
+                <input type="text" className="form-control" id="inputTotal" placeholder="Total" ref={total} />
               </div>
 
 

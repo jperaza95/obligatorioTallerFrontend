@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { seleccionarRubro } from '../features/rubrosSlice';
+import GraficoBarras from "./GraficoBarras";
+import GraficoLineas from "./GraficoLineas";
 
 import {
   Chart as ChartJS,
@@ -29,9 +31,6 @@ ChartJS.register(
   Legend
 );
 
-
-
-
 const Analisis = () => {
   const dispatch = useDispatch();
 
@@ -57,8 +56,6 @@ const Analisis = () => {
   const [totalGM2022, setTotalGM2022] = useState([]);
 
   const [mensajeAnalisis, setMensajeAnalisis] = useState([]);
-
-
 
   const obtenerRubro = (idRubro) => {
 
@@ -94,130 +91,6 @@ const Analisis = () => {
     }
   };
 
-  // const totalGastosPorMes = (gastos) => {
-  //   console.log(gastos);
-
-  //   let montoTotalPorMes2023 = [
-  //     {
-  //       Mes: "Enero",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Febrero",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Marzo",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Abril",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Mayo",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Junio",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Julio",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Agosto",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Setiembre",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Octubre",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Noviembre",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Diciembre",
-  //       Total: 0
-  //     },
-  //   ]
-
-  //   let montoTotalPorMes2022 = [
-  //     {
-  //       Mes: "Enero",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Febrero",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Marzo",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Abril",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Mayo",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Junio",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Julio",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Agosto",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Setiembre",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Octubre",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Noviembre",
-  //       Total: 0
-  //     },
-  //     {
-  //       Mes: "Diciembre",
-  //       Total: 0
-  //     },
-  //   ]
-  //   for (const gasto of gastos) {
-  //     let fechaDelGasto = new Date(gasto.fecha);
-  //     let mesDelGasto = parseInt(fechaDelGasto.getMonth());
-  //     let yearGasto = parseInt(fechaDelGasto.getFullYear());
-
-  //     if (yearGasto === 2023) {
-
-  //       montoTotalPorMes2023[mesDelGasto].Total += gasto.total;
-
-  //     } else if (yearGasto === 2022) {
-
-  //       montoTotalPorMes2022[mesDelGasto].Total += gasto.total;
-
-  //     }
-
-  //   }
-  //   let montosTotalesPorMes = [montoTotalPorMes2023, montoTotalPorMes2022];
-  //   console.log(montosTotalesPorMes);
-  //   return montosTotalesPorMes;
-  // };
 
   const totalGastosPorMes = (gastos) => {
     if (gastos) {
@@ -360,116 +233,24 @@ const Analisis = () => {
 
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" id="analisis">
       <div className='form-row justify-content-center'>
         <div className='form-group col-md-10'>
           <div className='row'>
-
-
-
             {/* Titulo */}
-
-            <IrAlInicio titulo={"Análisis"} descripcion="Gráficas relativas a los movimientos"></IrAlInicio>
-
-            {/* <div className="col-12">
-              <h2>Análisis</h2>
-              <p>Gráficas relativas a los movimientos</p>
-              <Link to="/">Ir al inicio</Link>
-
-            </div> */}
-
-
-            {/*---------------------------------------------*/}
-
-
-
-
+            <IrAlInicio titulo={"Análisis"} descripcion="Gráficas relativas a los movimientos"/>
             {/*---------Gráfico de ingresos por rubro-----*/}
-
-            <div className="col-6">
-              <Bar options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'top',
-                  },
-                  title: {
-                    display: true,
-                    text: 'Gráfico de ingresos por rubro',
-                  },
-                  scales: {
-                    x: {
-                      stacked: true,
-                    },
-                    y: {
-                      stacked: true,
-                    },
-                  }
-                },
-              }} data={{
-                labels: ingresos.map(i => obtenerRubro(i.categoria)),
-                datasets: [
-                  {
-                    label: 'Monto en pesos',
-                    data: ingresos.map(i => i.total),
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                  }
-                ],
-              }} />
-            </div>
-
+            <GraficoBarras titulo='Gráfico de ingresos por rubro' etiqueta='Monto en pesos' color='rgba(54, 162, 235, 0.2)' montos={ingresos} obtenerRubro={obtenerRubro}/>
             {/*---------------------------------------------*/}
-
-
             {/*---------Gráfico de gastos por rubro-----*/}
-
-            <div className="col-6">
-              <Bar options={{
-                responsive: true,
-                plugins: {
-                  legend: {
-                    position: 'top',
-                  },
-                  title: {
-                    display: true,
-                    text: 'Gráfico de gastos por rubro',
-                  },
-                  scales: {
-                    x: {
-                      stacked: true,
-                    },
-                    y: {
-                      stacked: true,
-                    },
-                  }
-                },
-              }} data={{
-                labels: gastos.map(g => obtenerRubro(g.categoria)),
-                datasets: [
-                  {
-                    label: 'Monto en pesos',
-                    data: gastos.map(g => g.total),
-                    backgroundColor: 'rgba(88, 111, 192, 0.2)',
-                  }
-                ],
-              }} />
-            </div>
+            <GraficoBarras titulo='Gráfico de gastos por rubro' etiqueta='Monto en pesos' color='rgba(88, 111, 192, 0.2)' montos={gastos} obtenerRubro={obtenerRubro}/>
           </div>
-
-
           {/*---------Gráfico de evolución del gasto-----*/}
-
-
-          <div className="col-6">
-            {<Line options={options3} data={data3} />}
-          </div>
-
-
+            <GraficoLineas opciones={options3} datos={data3}/>
           {/*---------------------------------------------*/}
 
-
           {/*----------- Desplegable de Rubros------------- */}
-          <div className="form-group col-6 ">
+          <div className="form-group col-6 grafico">
             <label htmlFor="inputRubro">Comparativo entre últimos dos gastos</label>
             <select id="inputRubro" className="form-control" onChange={seleccionarRubroHandler} ref={rubroElegido}>
               <option key={-1} value={-1}>Seleccione un rubro...</option>

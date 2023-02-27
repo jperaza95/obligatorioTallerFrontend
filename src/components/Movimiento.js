@@ -65,8 +65,7 @@ const Movimiento = ({ movim, cargarMovimientos }) => {
 
 
   return (
-
-    <>
+ 
       <tr>
         <th scope="row">{movim.id}</th>
         <td>{movim.concepto}</td>
@@ -86,7 +85,6 @@ const Movimiento = ({ movim, cargarMovimientos }) => {
       </tr>
 
 
-    </>
 
 
   )
