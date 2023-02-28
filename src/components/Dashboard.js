@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { guardarMovimientos } from "../features/movimientosSlice";
 import { guardarRubros } from '../features/rubrosSlice';
+import { caducarSesion } from "../features/sesionSlice";
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -16,7 +17,6 @@ const Dashboard = () => {
       cargarMovimientos();
       cargarRubros();
     }
-
 
   }, [])
 
@@ -41,7 +41,8 @@ const Dashboard = () => {
         .then(result => {
           console.log(result);
           if (result.codigo === 401) {
-            alert("Sesion caduco");
+            // alert("Sesion caduco");
+            dispatch(caducarSesion(true));
             localStorage.clear();
             navigate("/login");
 

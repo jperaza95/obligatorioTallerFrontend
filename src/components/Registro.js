@@ -1,15 +1,15 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Ciudades from './Ciudades';
 import { useRef } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Departamentos from './Departamentos';
 import Spinner from 'react-bootstrap/Spinner';
-
+import { caducarSesion } from '../features/sesionSlice';
 
 const Registro = () => {
-
+  const dispatch = useDispatch();
   const dpto = useSelector(state => state.ciudades.dpto);
   const city = useSelector(state => state.ciudades.ciudadSeleccionada);
   const usuario = useRef(null);
@@ -48,7 +48,7 @@ const Registro = () => {
           if (result.codigo === 200) {
             localStorage.setItem("apiKey", result.apiKey);
             localStorage.setItem("idUsuario", result.id);
-
+            dispatch(caducarSesion(false));
             navigate("/");
           } else {
             setError(true);

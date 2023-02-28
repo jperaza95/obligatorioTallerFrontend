@@ -3,14 +3,13 @@ import { seleccionarDpto } from '../features/ciudadesSlice';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { guardarDepartamentos } from '../features/departamentosSlice';
-import { useNavigate } from 'react-router-dom';
 
 const Departamentos = () => {
 
     //Busca los departamentos en el store.
     const departamentos = useSelector(state => state.departamentos.departamentos);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+
 
     const dpto = useRef(null);
 
@@ -25,17 +24,7 @@ const Departamentos = () => {
         fetch("https://dwallet.develotion.com/departamentos.php")
             .then(response => response.json())
             .then(result => {
-
-                // if(result.codigo === 401){
-                //     alert("Sesion caduco");
-                //     localStorage.clear();
-                //     navigate("/login");          
-                //   }else{
-                //       dispatch(guardarDepartamentos(result.departamentos));             
-                //   }
                 dispatch(guardarDepartamentos(result.departamentos));             
-
-
             })
             .catch(error => console.log('error', error));
 
@@ -47,7 +36,6 @@ const Departamentos = () => {
                 <option key={-1} value={-1}>Seleccione un departamento...</option>
                 {departamentos.map(dpto => <option key={dpto.id} value={dpto.id}> {dpto.nombre}</option>)}
             </select>
-
         </div>
     )
 }

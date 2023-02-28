@@ -5,7 +5,7 @@ const Tarjeta = ({tipo,header,title,body}) => {
             <div className="card-header">{header}</div>
             <div className={`card-body text-${tipo}`}>
                 <h5 className="card-title">{title}</h5>
-                <p className="card-text">{body}</p>
+                <p className="card-text text-right">{body}</p>
             </div>
         </div>
     )

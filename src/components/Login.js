@@ -1,5 +1,7 @@
-import { useRef, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import { caducarSesion } from '../features/sesionSlice';
 
 
 import Spinner from 'react-bootstrap/Spinner';
@@ -7,13 +9,19 @@ import Spinner from 'react-bootstrap/Spinner';
 const Login = () => {
 
     let navigate = useNavigate();
+    let dispatch = useDispatch();
+
+    const sesionCaduco = useSelector(state=>state.sesion.sesionCaduco);
+
+    useEffect(() => {
+     sesionCaduco&&setError("La sesión ha caducado");   
+    }, [sesionCaduco]);
+    
 
     const [error, setError] = useState(null);
 
     const [cargando, setCargando] = useState(false);
 
-    //const usuario = useRef(null);
-    //const pass = useRef(null);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -51,7 +59,7 @@ const Login = () => {
                 if (result.codigo === 200) {
                     localStorage.setItem("apiKey", result.apiKey);
                     localStorage.setItem("idUsuario", result.id);
-
+                    dispatch(caducarSesion(false));
                     navigate("/");
                 } else {
                     setError(result.mensaje);
@@ -100,12 +108,9 @@ const Login = () => {
                                 aria-hidden="true">
                             </Spinner> : "Login"}</button>
 
-
                         <br />
                         <hr></hr>
                         <Link to="/registro">Ir a Registro</Link>
-
-
 
                     </div>
                 </div>

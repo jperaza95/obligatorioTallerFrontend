@@ -20,7 +20,6 @@ const AgregarMovimiento = ({ tipo }) => {
   const [cargarMovimientos] = useOutletContext();
 
 
-
   const concepto = useRef(null);
   const rubro = useSelector(state => state.rubros.rubro);
   const medio = useRef(null);

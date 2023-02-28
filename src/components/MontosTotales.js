@@ -24,24 +24,24 @@ const MontosTotales = () => {
     <div className="container mt-5">
 
       <IrAlInicio titulo={"Montos Totales"} descripcion="Resumen de gastos e ingresos"></IrAlInicio>
-
-      <Tarjeta tipo="danger" header="Gastos:" title="Total de gastos" body={gastosTotales()}>
+      <hr></hr>
+      <Tarjeta tipo="danger" header="Gastos:" title="Total de gastos" body={`$ ${gastosTotales()}`}>
 
       </Tarjeta>
 
-      <Tarjeta tipo="primary" header="Ingresos:" title="Total de ingresos" body={ingresosTotales()}>
+      <Tarjeta tipo="primary" header="Ingresos:" title="Total de ingresos" body={`$ ${ingresosTotales()}`}>
 
       </Tarjeta>
 
 
       {ingresosTotales() - gastosTotales() < 0 ?
-        <Tarjeta tipo="danger" header="Saldo Final:" title="Resultado" body={ingresosTotales() - gastosTotales()}>
+        <Tarjeta tipo="danger" header="Saldo Final:" title="Resultado" body={`$ ${ingresosTotales() - gastosTotales()}`}>
 
         </Tarjeta>
 
         :
 
-        <Tarjeta tipo="success" header="Saldo Final:" title="Resultado" body={ingresosTotales() - gastosTotales()}>
+        <Tarjeta tipo="success" header="Saldo Final:" title="Resultado" body={`$ ${ingresosTotales() - gastosTotales()}`}>
 
         </Tarjeta>
       }

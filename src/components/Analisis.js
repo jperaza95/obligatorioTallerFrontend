@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { seleccionarRubro } from '../features/rubrosSlice';
 import GraficoBarras from "./GraficoBarras";
@@ -16,8 +15,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-import { Line } from 'react-chartjs-2';
+
 import IrAlInicio from "./IrAlInicio";
 
 ChartJS.register(
